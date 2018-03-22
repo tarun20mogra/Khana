@@ -1,0 +1,146 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_activity_background"
+    tools:context="com.example.tarun.khana.MainActivity">
+
+
+    <EditText
+        android:id="@+id/seekerUserName"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/textview_curve"
+        android:ems="10"
+        android:hint="User Name"
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <EditText
+        android:id="@+id/seekerPassword"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/seekerUserName"
+        android:layout_alignRight="@+id/seekerUserName"
+        android:layout_below="@+id/seekerUserName"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/textview_curve"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekerUserName" />
+
+    <Button
+        android:id="@+id/loginSeekerButton"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+
+        android:layout_alignLeft="@+id/seekerPassword"
+        android:layout_alignStart="@+id/seekerPassword"
+        android:layout_below="@+id/seekerPassword"
+        android:layout_marginTop="24dp"
+        android:background="@color/loginButton"
+        android:text="Login"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekerPassword" />
+
+    <TextView
+        android:id="@+id/forgotPasswordSeeker"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Forgot Password?"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginSeekerButton" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotPasswordSeeker"
+        android:elevation="6dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="NOT A MEMBER YET?"
+            android:textColor="@color/background"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/seekerSignUpButton"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/curve_button"
+            android:text="SIGN UP"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="WELCOME TO KHANA SEEKER"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="PLEASE LOGIN TO YOUR ACCOUNT"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        tools:ignore="MissingConstraints" />
+
+
+</android.support.constraint.ConstraintLayout>

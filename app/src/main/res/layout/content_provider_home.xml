@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.tarun.khana.ProviderHome"
+    tools:showIn="@layout/app_bar_provider_home">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/dishName"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Dish Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <EditText
+            android:id="@+id/priceDish"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Price"
+            android:inputType="textPersonName|number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dishName" />
+
+        <RadioGroup
+            android:id="@+id/typeOfDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:gravity="left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+            <RadioButton
+                android:id="@+id/nonVegTye"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Non Vegeterian"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/vegTye" />
+
+            <RadioButton
+                android:id="@+id/vegTye"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Vegeterian"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <RadioButton
+                android:id="@+id/veganTye"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Vegan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nonVegTye" />
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="20dp"
+            android:text="Type"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quantityDish"
+            android:layout_marginLeft="60dp"
+            />
+
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Spicy"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/quantityDish" />
+
+        <RadioGroup
+            android:id="@+id/spicyRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.304"
+            app:layout_constraintStart_toEndOf="@+id/typeOfDish"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:layout_marginRight="32dp">
+
+            <RadioButton
+                android:id="@+id/lowSpiciness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Low"
+                app:layout_constraintStart_toEndOf="@+id/vegTye"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                android:textSize="18sp"/>
+
+            <RadioButton
+                android:id="@+id/mediumSpiciness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medium"
+                app:layout_constraintStart_toEndOf="@+id/nonVegTye"
+                app:layout_constraintTop_toBottomOf="@+id/lowSpiciness"
+                android:textSize="18sp"/>
+
+            <RadioButton
+                android:id="@+id/spicySpiciness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spicy"
+                app:layout_constraintStart_toEndOf="@+id/veganTye"
+                app:layout_constraintTop_toBottomOf="@+id/mediumSpiciness"
+                android:textSize="18sp"/>
+
+
+        </RadioGroup>
+
+
+        <EditText
+            android:id="@+id/addressProvider"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Confirm Address"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priceDish" />
+
+        <Button
+            android:id="@+id/uploadPhoto"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/curve_button"
+            android:elevation="5dp"
+            android:text="Upload Photo"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/typeOfDish" />
+
+        <Button
+            android:id="@+id/previewOrder"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/curve_button"
+            android:elevation="7dp"
+            android:text="Preview Order"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintStart_toEndOf="@+id/uploadPhoto" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Ready To help?"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+        <EditText
+            android:id="@+id/quantityDish"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="Quantity"
+            android:inputType="textPersonName|number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressProvider" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</ScrollView>

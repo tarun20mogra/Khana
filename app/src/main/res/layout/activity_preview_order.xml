@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--orderPhoto-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tarun.khana.PreviewOrder">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/orderPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/common_full_open_on_phone" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="Dish Name"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderPhoto" />
+
+        <TextView
+            android:id="@+id/dishName"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/name"
+            app:layout_constraintTop_toBottomOf="@+id/orderPhoto" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Price"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/dishPrice"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/price"
+            app:layout_constraintTop_toBottomOf="@+id/dishName" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Quantity"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price" />
+
+        <TextView
+            android:id="@+id/dishQuantity"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/quantity"
+            app:layout_constraintTop_toBottomOf="@+id/dishPrice" />
+
+
+        <TextView
+            android:id="@+id/spicy"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Spicy"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+        <TextView
+            android:id="@+id/spiciness"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/spicy"
+
+            app:layout_constraintTop_toBottomOf="@+id/dishQuantity" />
+
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Type"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spicy" />
+
+        <TextView
+            android:id="@+id/dishType"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/type"
+            app:layout_constraintTop_toBottomOf="@+id/spiciness" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Address"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/providerAddress"
+            android:layout_width="180dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/address"
+            app:layout_constraintTop_toBottomOf="@+id/dishType" />
+
+        <Button
+            android:id="@+id/submitProviderOrder"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="148dp"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/curve_button"
+            android:text="Submit Order"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address" />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>
+
