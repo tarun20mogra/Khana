@@ -99,7 +99,10 @@ public class ServiceSeekerLogin extends Fragment {
                     Log.v("Exixts:",""+dataSnapshot.child(userNameSeeker).getValue());
                     GetUserInfo login = dataSnapshot.child(userNameSeeker).getValue(GetUserInfo.class);
                     if(login.getPassWord().equals(passwordSeeker)){
-                        Toast.makeText(getActivity(), "Valid User", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), SeekerHome.class);
+                        intent.putExtra("username",login);
+                        startActivity(intent);
+
                     }
                     else {
                         Toast.makeText(getActivity(), "Invalid User", Toast.LENGTH_SHORT).show();
