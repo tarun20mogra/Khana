@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 
 import java.io.Serializable;
 
-/**
- * Created by Tarun on 3/15/2018.
- */
+
 
 public class OrderPreviewSaveInfo implements Serializable {
     String dish_name, dish_price, dish_quantity, provider_address, dist_type, dish_spiciness, today_date;
@@ -19,7 +17,7 @@ public class OrderPreviewSaveInfo implements Serializable {
         dist_type = type;
         dish_spiciness = spiciness;
         today_date = date;
-
     }
+
 
 }

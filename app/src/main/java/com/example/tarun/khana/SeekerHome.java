@@ -7,36 +7,112 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SeekerHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
-
+    //Global Variables
     GoogleMap gMap;
     MapView mapViewForFoodLocation;
     ListView listView;
-    ArrayAdapter<String> arrayAdapter;
-    String[] string = {"one","two","three","four","one","two","three","four","one","two","three","four"};
+    String currentUserAddress = null;
+    DatabaseReference databaseReference;
+    SeekerGetTodayFoodInfo [] seekerGetTodayFoodInfo = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Setting the view for the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_home);
-        //getting the intent
+        //getting the intent and setting the variables
         final Bundle intent = getIntent().getExtras();
         final GetUserInfo userInfoLogin = (GetUserInfo) intent.getSerializable("username");
-        Toast.makeText(this, ""+userInfoLogin.user_name, Toast.LENGTH_SHORT).show();
-        //Setting the map view here
+        currentUserAddress = userInfoLogin.user_address;
+        //Setting todays date
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+        final Date now = new Date();
+        final String strDate = sdfDate.format(now);
+        //Database Reference
+         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/TodaysFood/"+strDate);
+         databaseReference.addChildEventListener(new ChildEventListener() {
+             @Override
+             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                 Log.v("Child value is", ""+dataSnapshot.getValue());
+                 ObjectMapper mapper = new ObjectMapper();
+                 String json = "";
+                 String json1 = "";
+                 try {
+                     json  = mapper.writeValueAsString(dataSnapshot.getValue());
+                     json1 = "["+json+"]";
+                     Log.v("json is",""+json);
+                 } catch (JsonProcessingException e) {
+                     e.printStackTrace();
+                 }
+                 mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+                 try {
+                     seekerGetTodayFoodInfo = mapper.readValue(json1,SeekerGetTodayFoodInfo[].class);
+                     Log.v("dish name is", ""+seekerGetTodayFoodInfo[0].dish_name);
+                 }catch (JsonParseException exception){
+                     Log.v("error","Json Parser"+exception);
+                 } catch (JsonMappingException e){
+                     Log.v("error","Mapping: "+e);
+                 }
+                 catch (IOException e) {
+                     Log.v("error","IoException"+e);
+                     e.printStackTrace();
+                 }
+
+             }
+
+             @Override
+             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+             }
+
+             @Override
+             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+             }
+
+             @Override
+             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+             }
+
+             @Override
+             public void onCancelled(DatabaseError databaseError) {
+
+             }
+         });
+
+        //Setting the map view methods here
         mapViewForFoodLocation = findViewById(R.id.mapViewForFoodLocations);
         if(mapViewForFoodLocation != null){
             mapViewForFoodLocation.onCreate(null);
@@ -44,20 +120,7 @@ public class SeekerHome extends AppCompatActivity
             mapViewForFoodLocation.getMapAsync(this);
         }
         //setting the listview here
-        arrayAdapter =  new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1) ;
-        arrayAdapter.add("First");
-        arrayAdapter.add("second");
-        arrayAdapter.add("Third");
-        arrayAdapter.add("Fourth");
-        arrayAdapter.add("Fifth");
-        arrayAdapter.add("Sixth");
-        arrayAdapter.add("Seventh");
-        arrayAdapter.add("Eighth");
-        arrayAdapter.add("Ninth");
-        arrayAdapter.add("Tenth");
-
         listView = (ListView) findViewById(R.id.listViewForFood);
-        listView.setAdapter(arrayAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -124,6 +187,7 @@ public class SeekerHome extends AppCompatActivity
         return true;
     }
 
+    //Seeting the coordinates to show on the map
     @Override
     public void onMapReady(GoogleMap googleMap) {
         MapsInitializer.initialize(this);
