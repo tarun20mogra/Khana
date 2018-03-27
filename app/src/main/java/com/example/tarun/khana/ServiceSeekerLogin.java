@@ -42,6 +42,7 @@ public class ServiceSeekerLogin extends Fragment {
         Button signUpSeeker;
         TextView forgotPasswordSeeker;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -117,6 +118,7 @@ public class ServiceSeekerLogin extends Fragment {
         public void onCancelled(DatabaseError databaseError) {
 
         }
+
     });
     }
 
