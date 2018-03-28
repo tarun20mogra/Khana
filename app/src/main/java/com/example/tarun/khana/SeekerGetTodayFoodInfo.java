@@ -1,6 +1,7 @@
 package com.example.tarun.khana;
 
 
+import com.google.firebase.storage.StorageReference;
 
 public class SeekerGetTodayFoodInfo {
     public String dish_name;
@@ -10,5 +11,5 @@ public class SeekerGetTodayFoodInfo {
     public String dish_spiciness;
     public String provider_address;
     public String today_date;
-
+    public String user_name;
 }

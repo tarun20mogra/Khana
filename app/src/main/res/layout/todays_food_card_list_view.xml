@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <android.support.v7.widget.CardView
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_width="match_parent"
         app:cardCornerRadius="3dp"
         app:cardElevation="5dp">
@@ -17,24 +17,25 @@
             <ImageView
                 android:id="@+id/todaysFoodImage"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="250dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginStart="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:id="@+id/todaysFoodName"
                 android:layout_width="300dp"
-                android:layout_height="100dp"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/todaysFoodImage" />
 
             <TextView
                 android:layout_width="90dp"
-                android:layout_height="100dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

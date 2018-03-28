@@ -28,19 +28,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PreviewOrder extends AppCompatActivity {
+    //bitmap for image uri
     Bitmap bitmap;
     String user_name;
+    //For current user info
     GetUserInfo userInfoLogin = new GetUserInfo();
+    //for Image storage to firebase
     StorageReference storageReferenceForProvider = FirebaseStorage.getInstance().getReference();
     private ProgressDialog progressDialog;
 
 
-
-    public class PreviewOrderHolder{
+    //class holding all the view variables for preview order view
+    public class PreviewOrderHolder {
         ImageView imageView;
-        TextView dish_name, dish_price, dish_quantity,dish_spiciness,dish_type, provider_address;
+        TextView dish_name, dish_price, dish_quantity, dish_spiciness, dish_type, provider_address;
         Button submitOrder;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Setting the view
@@ -48,11 +52,13 @@ public class PreviewOrder extends AppCompatActivity {
         setContentView(R.layout.activity_preview_order);
         //Getting the intent value here
         final Bundle intent = getIntent().getExtras();
+        //getting the URI from previous activit from intent
         final Uri uri = Uri.parse(intent.getString("image"));
+        //order info from previous info
         final OrderPreviewSaveInfo orderPreviewSaveInfo = (OrderPreviewSaveInfo) intent.getSerializable("preview");
+        //current user info in the class UserInfoLogin
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         user_name = intent.getString("username");
-
         //Initializing all the variables here
         progressDialog = new ProgressDialog(PreviewOrder.this);
         PreviewOrderHolder previewOrderHolder = new PreviewOrderHolder();
@@ -66,7 +72,7 @@ public class PreviewOrder extends AppCompatActivity {
         previewOrderHolder.dish_type = (TextView) findViewById(R.id.dishType);
         // Setting the image view from the URI obtained from Intent
         try {
-            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             previewOrderHolder.imageView.setImageBitmap(bitmap);
             previewOrderHolder.imageView.setRotation(90);
 
@@ -80,29 +86,31 @@ public class PreviewOrder extends AppCompatActivity {
         previewOrderHolder.provider_address.setText(orderPreviewSaveInfo.provider_address);
         previewOrderHolder.dish_spiciness.setText(orderPreviewSaveInfo.dish_spiciness);
         previewOrderHolder.dish_type.setText(orderPreviewSaveInfo.dist_type);
-
+        //on submit of the order saving it to the firebase
         previewOrderHolder.submitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference databaseReferenceForUser = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/providersFoodInfo/"+userInfoLogin.user_name);
-                StorageReference filepath = storageReferenceForProvider.child(userInfoLogin.user_name).child(orderPreviewSaveInfo.dish_name+"_"+orderPreviewSaveInfo.today_date);
+                //Database and the Storage refrence from Firebase for user history only
+                DatabaseReference databaseReferenceForUser = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/providersFoodInfo/" + userInfoLogin.user_name);
+                StorageReference filepath = storageReferenceForProvider.child(userInfoLogin.user_name).child(orderPreviewSaveInfo.dish_name + "_" + orderPreviewSaveInfo.today_date);
+                //database refrence for todays food only
                 final DatabaseReference generalDatabaseRefrence = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/TodaysFood/");
                 progressDialog.setMessage("Uploading...");
                 progressDialog.show();
 
                 //Saving the data for providers only
-                databaseReferenceForUser.push().setValue(new OrderPreviewSaveInfo(orderPreviewSaveInfo.dish_name,orderPreviewSaveInfo.dish_price,orderPreviewSaveInfo.dish_quantity,orderPreviewSaveInfo.provider_address,orderPreviewSaveInfo.dist_type,orderPreviewSaveInfo.dish_spiciness,orderPreviewSaveInfo.today_date));
+                databaseReferenceForUser.push().setValue(new OrderPreviewSaveInfo(orderPreviewSaveInfo.dish_name, orderPreviewSaveInfo.dish_price, orderPreviewSaveInfo.dish_quantity, orderPreviewSaveInfo.provider_address, orderPreviewSaveInfo.dist_type, orderPreviewSaveInfo.dish_spiciness, orderPreviewSaveInfo.today_date, userInfoLogin.user_name));
                 filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.v("upload done","upload done");
+                        Log.v("upload done", "upload done");
                     }
                 });
                 //Saving the food for today in different section
                 generalDatabaseRefrence.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        generalDatabaseRefrence.child(orderPreviewSaveInfo.today_date).child(userInfoLogin.user_name+"_"+orderPreviewSaveInfo.dish_name).setValue(new OrderPreviewSaveInfo(orderPreviewSaveInfo.dish_name,orderPreviewSaveInfo.dish_price,orderPreviewSaveInfo.dish_quantity,orderPreviewSaveInfo.provider_address,orderPreviewSaveInfo.dist_type,orderPreviewSaveInfo.dish_spiciness,orderPreviewSaveInfo.today_date));
+                        generalDatabaseRefrence.child(orderPreviewSaveInfo.today_date).child(userInfoLogin.user_name + "_" + orderPreviewSaveInfo.dish_name).setValue(new OrderPreviewSaveInfo(orderPreviewSaveInfo.dish_name, orderPreviewSaveInfo.dish_price, orderPreviewSaveInfo.dish_quantity, orderPreviewSaveInfo.provider_address, orderPreviewSaveInfo.dist_type, orderPreviewSaveInfo.dish_spiciness, orderPreviewSaveInfo.today_date, userInfoLogin.user_name));
                     }
 
                     @Override
@@ -110,22 +118,18 @@ public class PreviewOrder extends AppCompatActivity {
 
                     }
                 });
-                StorageReference filepathToTodaysFood = storageReferenceForProvider.child("Todays Food").child(orderPreviewSaveInfo.today_date).child(userInfoLogin.user_name+"_"+orderPreviewSaveInfo.dish_name);
+                //Image save for the todays food only
+                StorageReference filepathToTodaysFood = storageReferenceForProvider.child("Todays Food").child(orderPreviewSaveInfo.today_date).child(userInfoLogin.user_name + "_" + orderPreviewSaveInfo.dish_name);
                 filepathToTodaysFood.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressDialog.dismiss();
-                        Intent intent2 = new Intent(PreviewOrder.this,ProviderHome.class);
-                        intent2.putExtra("username",userInfoLogin);
+                        Intent intent2 = new Intent(PreviewOrder.this, ProviderHome.class);
+                        intent2.putExtra("username", userInfoLogin);
                         startActivity(intent2);
 
                     }
                 });
-
-
-
-
-
             }
         });
     }

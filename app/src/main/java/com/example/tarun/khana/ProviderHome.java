@@ -119,7 +119,7 @@ public class ProviderHome extends AppCompatActivity
 
                 }
                 else {
-                    OrderPreviewSaveInfo orderPreviewSaveInfo = new OrderPreviewSaveInfo(dish_name,dish_price,dish_quantity,provider_address,dish_type,dish_spiciness,strDate);
+                    OrderPreviewSaveInfo orderPreviewSaveInfo = new OrderPreviewSaveInfo(dish_name,dish_price,dish_quantity,provider_address,dish_type,dish_spiciness,strDate,userInfoLogin.user_name);
                     Intent previeworder = new Intent(ProviderHome.this,PreviewOrder.class);
                     //intent sending the values for the order to preview activity
                     previeworder.putExtra("preview",orderPreviewSaveInfo);

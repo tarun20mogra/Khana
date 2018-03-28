@@ -5,6 +5,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -55,6 +56,7 @@ public class SeekerHome extends AppCompatActivity
     ArrayList<SeekerGetTodayFoodInfo> todayFoodNearBy = new ArrayList<>();
     LatLng currentUserAddressLattitudeandLongitude,foodAddress;
     ArrayList<LatLng> foodproviderAddressLattitdeandLongitude = new ArrayList<>();
+    GetUserInfo userInfoLogin = new GetUserInfo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class SeekerHome extends AppCompatActivity
         setContentView(R.layout.activity_seeker_home);
         //getting the intent and setting the variables
         final Bundle intent = getIntent().getExtras();
-        final GetUserInfo userInfoLogin = (GetUserInfo) intent.getSerializable("username");
+        userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         currentUserAddress = userInfoLogin.user_address;
         //First thing first calculate the longitute and lattitude of the current user address
         Log.v("Current Address"," :"+currentUserAddress);
@@ -196,6 +198,7 @@ public class SeekerHome extends AppCompatActivity
 
         } else if (id == R.id.nav_profile) {
 
+
         } else if (id == R.id.nav_history) {
 
         } else if (id == R.id.nav_logout) {
@@ -278,7 +281,7 @@ public class SeekerHome extends AppCompatActivity
 
     //List view adapter
     void createListView(){
-        SeekerTodaysFoodCardListAdapter seekerTodaysFoodCardListAdapter = new SeekerTodaysFoodCardListAdapter(SeekerHome.this,todayFoodNearBy);
+        SeekerTodaysFoodCardListAdapter seekerTodaysFoodCardListAdapter = new SeekerTodaysFoodCardListAdapter(SeekerHome.this,todayFoodNearBy,userInfoLogin);
         listView.setAdapter(seekerTodaysFoodCardListAdapter);
     }
 }

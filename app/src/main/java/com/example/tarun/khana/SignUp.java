@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,8 +27,9 @@ public class SignUp extends AppCompatActivity {
     String user_address;
     String userType;
     private class SignUpHolder{
-        EditText userName,password,emailAddress,phone,address;
+        EditText userName,password,emailAddress,phone,userAddressLine1,userAddressLine2,userCity,userCountry,userZipCode;
         Button signUp;
+        TextView loginBack;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,13 @@ public class SignUp extends AppCompatActivity {
         signUpHolder.password =(EditText) findViewById(R.id.passwordInput);
         signUpHolder.emailAddress =(EditText) findViewById(R.id.emailInput);
         signUpHolder.phone =(EditText) findViewById(R.id.phoneInput);
-        signUpHolder.address =(EditText) findViewById(R.id.addressInput);
+        signUpHolder.userAddressLine1 =(EditText) findViewById(R.id.userAddressLine1);
+        signUpHolder.userAddressLine2 =(EditText) findViewById(R.id.userAddressLine2);
+        signUpHolder.userCity =(EditText) findViewById(R.id.userCity);
+        signUpHolder.userCountry =(EditText) findViewById(R.id.userCountry);
+        signUpHolder.userZipCode =(EditText) findViewById(R.id.userZipCode);
         signUpHolder.signUp = (Button) findViewById(R.id.signUpButton);
+        signUpHolder.loginBack = (TextView) findViewById(R.id.loginBack);
 
 
         //setting on click listner and saving the data to database
@@ -56,7 +63,7 @@ public class SignUp extends AppCompatActivity {
                 user_password = String.valueOf(signUpHolder.password.getText());
                 user_email = String.valueOf(signUpHolder.emailAddress.getText());
                 user_phone = String.valueOf(signUpHolder.phone.getText());
-                user_address = String.valueOf(signUpHolder.address.getText());
+                user_address = String.valueOf(signUpHolder.userAddressLine1.getText())+","+String.valueOf(signUpHolder.userAddressLine2.getText())+","+String.valueOf(signUpHolder.userCity.getText())+","+String.valueOf(signUpHolder.userZipCode.getText())+","+String.valueOf(signUpHolder.userCountry.getText());
                 //saveUserInfo.add(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address));
                 ref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -68,7 +75,7 @@ public class SignUp extends AppCompatActivity {
                             ref.child(user_name).setValue(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address));
                             Intent intent1 = new Intent(context,MainActivity.class);
                             startActivity(intent1);
-                            Toast.makeText(context, "Successfull ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, " Sign up Successfull ", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -79,6 +86,14 @@ public class SignUp extends AppCompatActivity {
                 });
 
 
+            }
+        });
+
+        signUpHolder.loginBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(context,MainActivity.class);
+                startActivity(intent1);
             }
         });
     }
