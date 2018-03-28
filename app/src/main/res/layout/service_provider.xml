@@ -24,7 +24,7 @@
                 android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
                 android:padding="16dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/ic_public_white_42dp"/>
             <TextView
@@ -61,7 +61,6 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:hint="******"
-                android:textColor="@color/white"
 
                 android:background="@android:color/transparent"
                 android:layout_marginTop="8dp"
