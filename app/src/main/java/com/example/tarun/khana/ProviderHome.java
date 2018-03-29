@@ -36,9 +36,10 @@ public class ProviderHome extends AppCompatActivity
     String dish_type = null;
     String dish_spiciness = null;
     Uri uri;
+    GetUserInfo userInfoLogin = new GetUserInfo();
     final ProviderHomeHolder providerHomeHolder = new ProviderHomeHolder();
     public class ProviderHomeHolder{
-        EditText dishName, price, confirmAddress, quantity;
+        EditText dishName, price, addressLine1,addressLine2,city,zipCode,country, quantity;
         RadioGroup type, spiciness;
         Button uploadPhoto, previewOrder;
     }
@@ -49,16 +50,20 @@ public class ProviderHome extends AppCompatActivity
         setContentView(R.layout.activity_provider_home);
         //Receiving the intent here
         final Bundle intent = getIntent().getExtras();
-        final GetUserInfo userInfoLogin = (GetUserInfo) intent.getSerializable("username");
+        userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         //Initializing all the variables for the XML
         providerHomeHolder.dishName = (EditText) findViewById(R.id.dishName);
         providerHomeHolder.price = (EditText) findViewById(R.id.priceDish);
-        providerHomeHolder.confirmAddress = (EditText) findViewById(R.id.addressProvider);
+        providerHomeHolder.addressLine1 = (EditText) findViewById(R.id.addressProviderLine1);
         providerHomeHolder.quantity = (EditText) findViewById(R.id.quantityDish);
         providerHomeHolder.type = (RadioGroup) findViewById(R.id.typeOfDish);
         providerHomeHolder.spiciness = (RadioGroup) findViewById(R.id.spicyRadioGroup);
         providerHomeHolder.uploadPhoto = (Button) findViewById(R.id.uploadPhoto);
         providerHomeHolder.previewOrder = (Button) findViewById(R.id.previewOrder);
+        providerHomeHolder.addressLine2 = (EditText) findViewById(R.id.addressProviderLine2);
+        providerHomeHolder.city = (EditText) findViewById(R.id.providerCity);
+        providerHomeHolder.zipCode = (EditText) findViewById(R.id.providerZipCode);
+        providerHomeHolder.country = (EditText) findViewById(R.id.providerCountry);
         //Setting todays date
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
         Date now = new Date();
@@ -108,13 +113,32 @@ public class ProviderHome extends AppCompatActivity
         providerHomeHolder.previewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ProviderHome.this, "clicked" + bitmap , Toast.LENGTH_SHORT).show();
+
                 dish_name = providerHomeHolder.dishName.getText().toString();
                 dish_price = String.valueOf(providerHomeHolder.price.getText());
                 dish_quantity = String.valueOf(providerHomeHolder.quantity.getText());
-                provider_address = String.valueOf(providerHomeHolder.confirmAddress.getText());
+                if(!String.valueOf(providerHomeHolder.addressLine2.getText()).isEmpty()){
+                    if(!String.valueOf(providerHomeHolder.addressLine1.getText()).isEmpty() && !String.valueOf(providerHomeHolder.city.getText()).isEmpty() && !String.valueOf(providerHomeHolder.zipCode.getText()).isEmpty() && !String.valueOf(providerHomeHolder.country.getText()).isEmpty())
+                    {provider_address = String.valueOf(providerHomeHolder.addressLine1.getText())+","+String.valueOf(providerHomeHolder.addressLine2.getText())+","+String.valueOf(providerHomeHolder.city.getText())+","+String.valueOf(providerHomeHolder.zipCode.getText())+","+String.valueOf(providerHomeHolder.country.getText());}
+                    else {
+                        provider_address = null;
+                    }
 
-                if(dish_name.isEmpty() || dish_price.isEmpty() || dish_quantity.isEmpty() || provider_address.isEmpty() || dish_type == null || dish_quantity == null || uri == null){
+                }
+                else if(String.valueOf(providerHomeHolder.addressLine2.getText()).isEmpty())
+                {
+                    if(!String.valueOf(providerHomeHolder.addressLine1.getText()).isEmpty() || !String.valueOf(providerHomeHolder.city.getText()).isEmpty() || !String.valueOf(providerHomeHolder.zipCode.getText()).isEmpty() || !String.valueOf(providerHomeHolder.country.getText()).isEmpty())
+                    {
+                        provider_address = String.valueOf(providerHomeHolder.addressLine1.getText())+","+String.valueOf(providerHomeHolder.city.getText())+","+String.valueOf(providerHomeHolder.zipCode.getText())+","+String.valueOf(providerHomeHolder.country.getText());
+
+                    }
+                    else {
+                        provider_address = null;
+                    }
+
+                }
+
+                if(dish_name.isEmpty() || dish_price.isEmpty() || dish_quantity.isEmpty() || provider_address.isEmpty() || provider_address == null || dish_type == null || dish_quantity == null || uri == null){
                     Toast.makeText(ProviderHome.this, "Values can not be left empty", Toast.LENGTH_LONG).show();
 
                 }
@@ -183,6 +207,11 @@ public class ProviderHome extends AppCompatActivity
             Intent intent = new Intent(this,ProviderHome.class);
             startActivity(intent);
         } else if (id == R.id.nav_profile) {
+            Intent intent = new Intent(ProviderHome.this,UserProfile.class);
+            intent.putExtra("userProfile",userInfoLogin);
+            intent.putExtra("user_is","Provider");
+            startActivity(intent);
+
 
 
         } else if (id == R.id.nav_history) {

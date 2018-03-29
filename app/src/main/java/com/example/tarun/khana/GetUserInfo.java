@@ -9,7 +9,7 @@ public class GetUserInfo implements Serializable{
     String user_name;
     String user_address;
     String user_phone;
-
+    String user_fullName;
     String getPassWord(){
         return user_password;
     }

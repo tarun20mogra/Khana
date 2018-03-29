@@ -3,7 +3,9 @@ package com.example.tarun.khana;
 
 import com.google.firebase.storage.StorageReference;
 
-public class SeekerGetTodayFoodInfo {
+import java.io.Serializable;
+
+public class SeekerGetTodayFoodInfo implements Serializable {
     public String dish_name;
     public  String dish_quantity;
     public String dish_price;

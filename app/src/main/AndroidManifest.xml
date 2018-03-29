@@ -49,7 +49,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA5xOtVTTcD4TZMp2vRbOwnBOni3HLU7EM" />
 
-        <activity android:name=".SeekerClickedTodaysFoodInfo"></activity>
+        <activity android:name=".SeekerClickedTodaysFoodInfo" />
+        <activity android:name=".UserProfile"></activity>
     </application>
 
 </manifest>

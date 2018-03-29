@@ -1,5 +1,6 @@
 package com.example.tarun.khana;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,7 @@ public class ServiceSeekerLogin extends Fragment {
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/seeker");
     private boolean flag = false;
 
+
     private class SeekerLoginHolder{
         EditText seekerUserName;
         EditText seekerPassword;
@@ -44,10 +46,11 @@ public class ServiceSeekerLogin extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.service_seeker, container, false);
         final SeekerLoginHolder seekerLoginHolder = new SeekerLoginHolder();
+
 
         seekerLoginHolder.seekerUserName = (EditText) rootView.findViewById(R.id.seekerUserName);
         seekerLoginHolder.seekerPassword = (EditText) rootView.findViewById(R.id.seekerPassword);
@@ -61,7 +64,14 @@ public class ServiceSeekerLogin extends Fragment {
 
                 userNameSeeker = String.valueOf(seekerLoginHolder.seekerUserName.getText());
                 passwordSeeker = String.valueOf(seekerLoginHolder.seekerPassword.getText());
-                signIn(userNameSeeker,passwordSeeker);
+                if(userNameSeeker.isEmpty() || passwordSeeker.isEmpty()){
+                    Toast.makeText(context.getActivity(), "Invalid username or password", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+
+                    signIn(userNameSeeker,passwordSeeker);
+                }
             }
 
         });

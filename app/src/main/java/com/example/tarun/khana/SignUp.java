@@ -26,8 +26,9 @@ public class SignUp extends AppCompatActivity {
     String user_phone;
     String user_address;
     String userType;
+    String user_fullName;
     private class SignUpHolder{
-        EditText userName,password,emailAddress,phone,userAddressLine1,userAddressLine2,userCity,userCountry,userZipCode;
+        EditText userName,password,emailAddress,phone,userAddressLine1,userAddressLine2,userCity,userCountry,userZipCode, userFullName;
         Button signUp;
         TextView loginBack;
     }
@@ -53,6 +54,7 @@ public class SignUp extends AppCompatActivity {
         signUpHolder.userZipCode =(EditText) findViewById(R.id.userZipCode);
         signUpHolder.signUp = (Button) findViewById(R.id.signUpButton);
         signUpHolder.loginBack = (TextView) findViewById(R.id.loginBack);
+        signUpHolder.userFullName = (EditText) findViewById(R.id.fullNameInput);
 
 
         //setting on click listner and saving the data to database
@@ -63,27 +65,56 @@ public class SignUp extends AppCompatActivity {
                 user_password = String.valueOf(signUpHolder.password.getText());
                 user_email = String.valueOf(signUpHolder.emailAddress.getText());
                 user_phone = String.valueOf(signUpHolder.phone.getText());
-                user_address = String.valueOf(signUpHolder.userAddressLine1.getText())+","+String.valueOf(signUpHolder.userAddressLine2.getText())+","+String.valueOf(signUpHolder.userCity.getText())+","+String.valueOf(signUpHolder.userZipCode.getText())+","+String.valueOf(signUpHolder.userCountry.getText());
-                //saveUserInfo.add(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address));
-                ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.child(user_name).exists()){
-                            Toast.makeText(context, "username already exists", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            ref.child(user_name).setValue(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address));
-                            Intent intent1 = new Intent(context,MainActivity.class);
-                            startActivity(intent1);
-                            Toast.makeText(context, " Sign up Successfull ", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                user_fullName = String.valueOf(signUpHolder.userFullName.getText());
+                if(!String.valueOf(signUpHolder.userAddressLine2.getText()).isEmpty())
+                {
+                    if(!String.valueOf(signUpHolder.userAddressLine1.getText()).isEmpty() && !String.valueOf(signUpHolder.userCity.getText()).isEmpty() && !String.valueOf(signUpHolder.userZipCode.getText()).isEmpty() && !String.valueOf(signUpHolder.userCountry.getText()).isEmpty())
+                    {
+                        user_address = String.valueOf(signUpHolder.userAddressLine1.getText())+","+String.valueOf(signUpHolder.userAddressLine2.getText())+","+String.valueOf(signUpHolder.userCity.getText())+","+String.valueOf(signUpHolder.userZipCode.getText())+","+String.valueOf(signUpHolder.userCountry.getText());
 
                     }
-                });
+                    else {
+                        user_address = null;
+                    }
+                }
+                else if(String.valueOf(signUpHolder.userAddressLine2.getText()).isEmpty())
+                {
+                    if(!String.valueOf(signUpHolder.userAddressLine1.getText()).isEmpty() && !String.valueOf(signUpHolder.userCity.getText()).isEmpty() && !String.valueOf(signUpHolder.userZipCode.getText()).isEmpty() && !String.valueOf(signUpHolder.userCountry.getText()).isEmpty())
+                    {
+                        user_address = String.valueOf(signUpHolder.userAddressLine1.getText())+","+String.valueOf(signUpHolder.userCity.getText())+","+String.valueOf(signUpHolder.userZipCode.getText())+","+String.valueOf(signUpHolder.userCountry.getText());
+
+                    }
+                    else {
+                        user_address = null;
+                    }
+                }
+                if(user_fullName.isEmpty() ||user_name.isEmpty() || user_password.isEmpty() || user_email.isEmpty() || user_phone.isEmpty() || user_address == null){
+                    Toast.makeText(context, "Values can not be left empty", Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    //saveUserInfo.add(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address));
+                    ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.child(user_name).exists()){
+                                Toast.makeText(context, "username already exists", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                ref.child(user_name).setValue(new SaveUserInfo(user_name,user_password,user_email,user_phone,user_address,user_fullName));
+                                Intent intent1 = new Intent(context,MainActivity.class);
+                                startActivity(intent1);
+                                Toast.makeText(context, " Sign up Successfull ", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
 
 
             }
@@ -92,6 +123,7 @@ public class SignUp extends AppCompatActivity {
         signUpHolder.loginBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent1 = new Intent(context,MainActivity.class);
                 startActivity(intent1);
             }

@@ -1,15 +1,19 @@
 package com.example.tarun.khana;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -49,7 +53,8 @@ public class SeekerHome extends AppCompatActivity
     //Global Variables
     GoogleMap gMap;
     MapView mapViewForFoodLocation;
-    ListView listView;
+
+    RecyclerView recyclerView;
     String currentUserAddress = null;
     DatabaseReference databaseReference;
     SeekerGetTodayFoodInfo [] seekerGetTodayFoodInfo = null;
@@ -71,6 +76,9 @@ public class SeekerHome extends AppCompatActivity
         Log.v("Current Address"," :"+currentUserAddress);
         currentUserAddressLattitudeandLongitude = getLocationFromAddress(SeekerHome.this,currentUserAddress);
         Log.v("latt and long is"," :"+currentUserAddressLattitudeandLongitude);
+        //setting the Recycler View here
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewTodaysFood);
+
         //Setting todays date
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
         final Date now = new Date();
@@ -141,8 +149,8 @@ public class SeekerHome extends AppCompatActivity
             mapViewForFoodLocation.onResume();
             mapViewForFoodLocation.getMapAsync(this);
         }
-        //setting the listview here
-        listView = (ListView) findViewById(R.id.listViewForFood);
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -177,15 +185,12 @@ public class SeekerHome extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public boolean onOptionsItemSelected(MenuItem item){
 
-        //noinspection SimplifiableIfStatement
+        Intent intent = new Intent(SeekerHome.this,MainActivity.class);
+        startActivity(intent);
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -195,13 +200,20 @@ public class SeekerHome extends AppCompatActivity
         int id = item.getItemId();
 
        if (id == R.id.nav_home) {
+           Intent intent = new Intent(SeekerHome.this, SeekerHome.class);
+           startActivity(intent);
 
         } else if (id == R.id.nav_profile) {
-
+            Intent intent = new Intent(SeekerHome.this,UserProfile.class);
+            intent.putExtra("userProfile",userInfoLogin);
+            intent.putExtra("user_is","Seeker");
+            startActivity(intent);
 
         } else if (id == R.id.nav_history) {
 
         } else if (id == R.id.nav_logout) {
+           Intent intent = new Intent(SeekerHome.this,MainActivity.class);
+           startActivity(intent);
 
         }
 
@@ -281,7 +293,9 @@ public class SeekerHome extends AppCompatActivity
 
     //List view adapter
     void createListView(){
-        SeekerTodaysFoodCardListAdapter seekerTodaysFoodCardListAdapter = new SeekerTodaysFoodCardListAdapter(SeekerHome.this,todayFoodNearBy,userInfoLogin);
-        listView.setAdapter(seekerTodaysFoodCardListAdapter);
+        SeekerTodaysFoodListAdapter seekerTodaysFoodListAdapter = new SeekerTodaysFoodListAdapter(SeekerHome.this,todayFoodNearBy,userInfoLogin);
+        recyclerView.setLayoutManager(new LinearLayoutManager(SeekerHome.this));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(seekerTodaysFoodListAdapter);
     }
 }

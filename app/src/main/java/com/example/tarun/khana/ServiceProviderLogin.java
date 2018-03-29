@@ -1,5 +1,6 @@
 package com.example.tarun.khana;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import java.io.Serializable;
 public class ServiceProviderLogin extends Fragment {
     ServiceProviderLogin context = this;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/provider");
+
     private class ProviderLoginHolder{
         EditText providerUserName;
         EditText providerPassword;
@@ -51,7 +53,13 @@ public class ServiceProviderLogin extends Fragment {
         providerLoginHolder.loginProvider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(String.valueOf(providerLoginHolder.providerUserName.getText()),String.valueOf(providerLoginHolder.providerPassword.getText()));
+                if(String.valueOf(providerLoginHolder.providerUserName.getText()).isEmpty() || String.valueOf(providerLoginHolder.providerPassword.getText()).isEmpty()){
+                    Toast.makeText(context.getActivity(), "Invalid username or password", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    signIn(String.valueOf(providerLoginHolder.providerUserName.getText()),String.valueOf(providerLoginHolder.providerPassword.getText()));
+                }
             }
         });
 
@@ -91,6 +99,7 @@ public class ServiceProviderLogin extends Fragment {
                         if(login.getPassWord().equals(password)){
                             Intent intent1 = new Intent(getActivity(),ProviderHome.class);
                             intent1.putExtra("username", login);
+
                             startActivity(intent1);
 
                         }

@@ -47,6 +47,23 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/fullNameInput"
+                android:ems="10"
+                android:background="@android:color/transparent"
+                android:drawablePadding="12dp"
+                android:padding="8dp"
+                android:hint="Full Name"
+                android:textColorHint="#ffffff"
+                android:maxLines="1"
+                android:drawableLeft="@drawable/ic_account_user_name"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#f9d7db"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textColorHint="#ffffff"
                 android:ems="10"
                 android:id="@+id/emailInput"
