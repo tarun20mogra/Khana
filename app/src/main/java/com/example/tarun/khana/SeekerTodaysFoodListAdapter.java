@@ -75,7 +75,7 @@ public class SeekerTodaysFoodListAdapter extends RecyclerView.Adapter<SeekerToda
                 Intent intent = new Intent(context,SeekerClickedTodaysFoodInfo.class);
                 intent.putExtra("current_user_info",currentUserInfo);
                 intent.putExtra("todays_food_info", (Serializable) todayFoodInfo);
-                intent.putExtra("image_of_food_clicked",urls);
+                intent.putStringArrayListExtra("image_of_food_clicked",urls);
                 intent.putExtra("current_value",position);
                 context.startActivity(intent);
             }

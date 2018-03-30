@@ -87,7 +87,7 @@
                 android:id="@+id/loginSeekerButton"
                 android:background="@drawable/login_button"
                 android:text="Log in"
-                android:textColor="#f16f7d"
+                android:textColor="#354e66"
                 android:textAllCaps="false"
                 android:padding="16dp"
                 android:clickable="true"
@@ -98,6 +98,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/seekerSignUpButton"
                 android:background="@drawable/signup_button"
+                android:padding="16dp"
+
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textColor="#ffffff"
