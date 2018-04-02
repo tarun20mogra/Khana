@@ -4,13 +4,13 @@ package com.example.tarun.khana;
 import java.io.Serializable;
 
 public class GetUserInfo implements Serializable{
-    String user_email;
-    String user_password;
-    String user_name;
-    String user_address;
-    String user_phone;
-    String user_fullName;
-    String getPassWord(){
+    public String user_email;
+    public String user_password;
+    public String user_name;
+    public String user_address;
+    public String user_phone;
+    public String user_fullName;
+    public String getPassWord(){
         return user_password;
     }
 

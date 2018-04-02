@@ -19,6 +19,7 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import java.util.ArrayList;
 
 public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
+    private Singleton var = Singleton.getInstance();
     String quantity_number = null;
     private class SeekerClickedTodaysFoodInfoHolder{
         ImageView currentClickedFoodImage;
@@ -35,13 +36,11 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         Bundle intent = getIntent().getExtras();
         GetUserInfo currentUserInfo =  intent.getParcelable("current_user_info");
         final ArrayList<SeekerGetTodayFoodInfo> list = (ArrayList<SeekerGetTodayFoodInfo>) intent.getSerializable("todays_food_info");
-        ArrayList<String> url =  getIntent().getStringArrayListExtra("image_of_food_clicked");
+        //ArrayList<String> url =  getIntent().getStringArrayListExtra("image_of_food_clicked");
 
         final int i = intent.getInt("current_value");
-        Toast.makeText(this, ""+list.get(i).dish_name, Toast.LENGTH_SHORT).show();
-        for(int j = 0; j<=i; j++){
-            Log.v("url is",""+url.get(j));
-        }
+
+
         //initializig all the variables here
         final SeekerClickedTodaysFoodInfoHolder seekerClickedTodaysFoodInfoHolder = new SeekerClickedTodaysFoodInfoHolder();
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage = (ImageView) findViewById(R.id.currentClickedFoodImage);
@@ -56,8 +55,8 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
         //Setting all the views here
         //Image of the current clicked food
-        Glide.with(SeekerClickedTodaysFoodInfo.this).load(url.get(i)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
-        Log.v("image url",""+url.get(i));
+        Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
+        //Log.v("image url",""+url.get(i));
         //Name,quantity,price,address of the current clicked food
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodName.setText(list.get(i).dish_name);
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(list.get(i).dish_quantity);

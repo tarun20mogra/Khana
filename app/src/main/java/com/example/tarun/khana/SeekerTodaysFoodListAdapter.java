@@ -38,6 +38,8 @@ public class SeekerTodaysFoodListAdapter extends RecyclerView.Adapter<SeekerToda
     GetUserInfo currentUserInfo;
     //Arraylist of all the uri
     ArrayList<String> urls = new ArrayList<>();
+    private Singleton var = Singleton.getInstance();
+
     public SeekerTodaysFoodListAdapter(SeekerHome seekerHome, ArrayList<SeekerGetTodayFoodInfo> seekerGetTodayFoodInfo, GetUserInfo getUserInfo){
         todayFoodInfo = seekerGetTodayFoodInfo;
         context = seekerHome;
@@ -67,6 +69,7 @@ public class SeekerTodaysFoodListAdapter extends RecyclerView.Adapter<SeekerToda
                 Log.v("uri is",""+uri.toString());
                 Glide.with(context).load(uri.toString()).into(holder.todaysFoodImage);
                 urls.add(uri.toString());
+                var.urlOfTodaysFoodImage.put(todayFoodInfo.get(position).user_name+"_"+todayFoodInfo.get(position).dish_name,uri.toString());
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,7 @@ public class SeekerTodaysFoodListAdapter extends RecyclerView.Adapter<SeekerToda
                 Intent intent = new Intent(context,SeekerClickedTodaysFoodInfo.class);
                 intent.putExtra("current_user_info",currentUserInfo);
                 intent.putExtra("todays_food_info", (Serializable) todayFoodInfo);
-                intent.putStringArrayListExtra("image_of_food_clicked",urls);
+               // intent.putStringArrayListExtra("image_of_food_clicked",urls);
                 intent.putExtra("current_value",position);
                 context.startActivity(intent);
             }

@@ -113,7 +113,7 @@
                 android:id="@+id/forgotPasswordProvider"
                 android:text="Forgot Your Password?"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#ffffff"
+                android:textColor="#354e66"
                 android:padding="16dp"
                 android:clickable="true"
                 android:layout_marginBottom="16dp"

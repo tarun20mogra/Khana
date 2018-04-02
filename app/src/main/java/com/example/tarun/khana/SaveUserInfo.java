@@ -2,9 +2,7 @@ package com.example.tarun.khana;
 
 import android.util.Log;
 
-/**
- * Created by Tarun on 3/13/2018.
- */
+
 
 public class SaveUserInfo {
     public String user_name = null;
