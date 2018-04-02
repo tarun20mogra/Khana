@@ -86,6 +86,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
                     intent1.putExtra("food info",(Serializable) list.get(i));
                     intent1.putExtra("image",image);
                     intent1.putExtra("current_user_info",currentUserInfo);
+                    intent1.putExtra("order_quantity",quantity_number);
                     startActivity(intent1);
                 }
 
