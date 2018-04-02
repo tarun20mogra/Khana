@@ -50,7 +50,8 @@
             android:value="AIzaSyA5xOtVTTcD4TZMp2vRbOwnBOni3HLU7EM" />
 
         <activity android:name=".SeekerClickedTodaysFoodInfo" />
-        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".UserProfile" />
+        <activity android:name=".SeekerOrderNow"></activity>
     </application>
 
 </manifest>

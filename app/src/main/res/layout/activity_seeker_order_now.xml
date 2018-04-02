@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    tools:context="com.example.tarun.khana.SeekerOrderNow"
+    android:background="#f2f2f2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/consent"
+            android:padding="5dp"
+            android:textStyle="italic"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Make a payment"
+            android:id="@+id/makePayment1"
+            android:background="@drawable/preview_button"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            android:padding="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#354e66"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#354e66"
+            android:textStyle="bold"
+            android:text="Order Summary"
+            android:textSize="24sp"
+            android:layout_marginTop="25dp"
+            />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_button"
+            android:layout_marginTop="10dp"
+            android:elevation="5dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Name :"
+                    android:textSize="18sp"
+                    android:id="@+id/textOrderName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textSize="18sp"
+                    android:id="@+id/currentOrderName"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textOrderName"
+                    android:layout_marginTop="8dp"
+                    android:text="Order Price : "
+                    android:textSize="18sp"
+                    android:id="@+id/textOrderPrice"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/currentOrderPrice"
+                    android:layout_below="@+id/currentOrderName"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textOrderPrice"
+                    android:layout_marginTop="8dp"
+                    android:text="Tax and fee : "
+                    android:textSize="18sp"
+                    android:id="@+id/textTaxandFee"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="$2.50"
+                    android:id="@+id/currentOrderTaxandFee"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/currentOrderPrice"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textTaxandFee"
+                    android:layout_marginTop="8dp"
+                    android:text="Application Fee : "
+                    android:textSize="18sp"
+                    android:id="@+id/textKhanaCharges"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="$3"
+                    android:id="@+id/currentKhanaChrges"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/currentOrderTaxandFee"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:id="@+id/viewSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textKhanaCharges"
+                    android:layout_marginTop="20dp"
+
+                    android:background="#354e66" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/viewSeparator"
+                    android:layout_marginTop="8dp"
+                    android:text="Toatal : "
+                    android:textSize="18sp"
+                    android:id="@+id/textTotalAmunt"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="$3"
+                    android:id="@+id/currentTotalAmount"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/viewSeparator"
+                    android:textSize="18sp"/>
+
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#354e66"
+            android:textStyle="bold"
+            android:text="Shipping Address"
+            android:textSize="24sp"
+            android:layout_marginTop="25dp"
+            />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:id="@+id/userShippingAddress"/>
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#354e66"
+            android:textStyle="bold"
+            android:text="Order Details"
+            android:textSize="24sp"
+            android:layout_marginTop="25dp"
+            />
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/currentItemImage"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/textKhanaCharges"
+                    android:layout_marginTop="20dp"
+                    android:background="#354e66" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/orderDishName"
+                    />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/textKhanaCharges"
+            android:layout_marginTop="20dp"
+            android:background="#354e66" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/makePayment2"
+
+            android:text="Make a payment"
+            android:background="@drawable/preview_button"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:padding="8dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

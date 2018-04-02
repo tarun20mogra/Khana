@@ -8,6 +8,7 @@ public class Singleton {
     private static final Singleton instance = new Singleton();
    // ArrayList<String> urlOfTodaysFoodImage = new ArrayList<>();
     HashMap<String,String> urlOfTodaysFoodImage = new HashMap<>();
+    GetUserInfo getUserInfo = new GetUserInfo();
     private Singleton(){}
     public static Singleton getInstance(){
         return instance;

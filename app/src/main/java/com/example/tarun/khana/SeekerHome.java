@@ -53,7 +53,7 @@ public class SeekerHome extends AppCompatActivity
     //Global Variables
     GoogleMap gMap;
     MapView mapViewForFoodLocation;
-
+    private Singleton var = Singleton.getInstance();
     RecyclerView recyclerView;
     String currentUserAddress = null;
     DatabaseReference databaseReference;
@@ -71,6 +71,7 @@ public class SeekerHome extends AppCompatActivity
         //getting the intent and setting the variables
         final Bundle intent = getIntent().getExtras();
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
+        var.getUserInfo = userInfoLogin;
         currentUserAddress = userInfoLogin.user_address;
         //First thing first calculate the longitute and lattitude of the current user address
         Log.v("Current Address"," :"+currentUserAddress);

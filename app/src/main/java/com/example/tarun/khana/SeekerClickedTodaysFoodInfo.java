@@ -16,11 +16,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
     private Singleton var = Singleton.getInstance();
     String quantity_number = null;
+    String image = null;
     private class SeekerClickedTodaysFoodInfoHolder{
         ImageView currentClickedFoodImage;
         TextView currentClickedFoodName,currentClickedFoodPrice, currentClickedFoodQuantity, providerAddress,descriptionOfTheFood ;
@@ -33,8 +35,8 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_clicked_todays_food_info);
         //getting the intent bundle from the previous activity
-        Bundle intent = getIntent().getExtras();
-        GetUserInfo currentUserInfo =  intent.getParcelable("current_user_info");
+        final Bundle intent = getIntent().getExtras();
+        final GetUserInfo currentUserInfo =  intent.getParcelable("current_user_info");
         final ArrayList<SeekerGetTodayFoodInfo> list = (ArrayList<SeekerGetTodayFoodInfo>) intent.getSerializable("todays_food_info");
         //ArrayList<String> url =  getIntent().getStringArrayListExtra("image_of_food_clicked");
 
@@ -56,7 +58,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         //Setting all the views here
         //Image of the current clicked food
         Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
-        //Log.v("image url",""+url.get(i));
+        image = var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name);
         //Name,quantity,price,address of the current clicked food
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodName.setText(list.get(i).dish_name);
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(list.get(i).dish_quantity);
@@ -75,6 +77,16 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
             public void onClick(View v) {
                 if(Integer.parseInt(quantity_number) > Integer.parseInt(list.get(i).dish_quantity)){
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed"+list.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                }
+                else if(Integer.parseInt(quantity_number) == 0){
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this,SeekerOrderNow.class);
+                    intent1.putExtra("food info",(Serializable) list.get(i));
+                    intent1.putExtra("image",image);
+                    intent1.putExtra("current_user_info",currentUserInfo);
+                    startActivity(intent1);
                 }
 
             }
