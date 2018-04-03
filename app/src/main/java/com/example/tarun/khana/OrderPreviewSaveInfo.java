@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 
 public class OrderPreviewSaveInfo implements Serializable {
-    String dish_name, dish_price, dish_quantity, provider_address, dist_type, dish_spiciness, today_date, user_name;
+    public String dish_name, dish_price, dish_quantity, provider_address, dist_type, dish_spiciness, today_date, user_name;
 
     public OrderPreviewSaveInfo(String name, String price, String quantity, String address, String type, String spiciness, String date, String userName){
         dish_name = name;

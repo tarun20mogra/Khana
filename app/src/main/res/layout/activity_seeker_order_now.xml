@@ -58,19 +58,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order Name :"
+                    android:text="Order Quantity :"
                     android:textSize="18sp"
-                    android:id="@+id/textOrderName"/>
+                    android:id="@+id/textOrderQuantity"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:textSize="18sp"
-                    android:id="@+id/currentOrderName"/>
+                    android:id="@+id/orderDishQuantity"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textOrderName"
+                    android:layout_below="@+id/textOrderQuantity"
                     android:layout_marginTop="8dp"
                     android:text="Order Price : "
                     android:textSize="18sp"
@@ -78,11 +78,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginTop="8dp"
-
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:id="@+id/currentOrderPrice"
-                    android:layout_below="@+id/currentOrderName"
+                    android:layout_below="@+id/orderDishQuantity"
                     android:textSize="18sp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -210,23 +209,7 @@
                     android:layout_marginTop="10dp"
                     android:id="@+id/orderDishName"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Order Quantity :"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/textViewOrderQuantity"
-                    android:layout_below="@+id/textViewOrderName"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:layout_below="@id/orderDishName"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/orderDishQuantity"
-                    />
+
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

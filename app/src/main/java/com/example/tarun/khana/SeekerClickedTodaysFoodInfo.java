@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,7 +59,6 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         //Setting all the views here
         //Image of the current clicked food
         Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
-        image = var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name);
         //Name,quantity,price,address of the current clicked food
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodName.setText(list.get(i).dish_name);
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(list.get(i).dish_quantity);
@@ -82,6 +82,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    image = var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name);
                     Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this,SeekerOrderNow.class);
                     intent1.putExtra("food info",(Serializable) list.get(i));
                     intent1.putExtra("image",image);
@@ -92,11 +93,51 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
             }
         });
+        seekerClickedTodaysFoodInfoHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Integer.parseInt(quantity_number) > Integer.parseInt(list.get(i).dish_quantity)){
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed"+list.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                }
+                else if(Integer.parseInt(quantity_number) == 0){
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    var.showCart = true;
+                    var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(list.get(i).user_name+"_"+list.get(i).dish_name));
+                    var.cartFoodInfo.add(list.get(i));
+                    var.quantity.add(quantity_number);
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Added to cart", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.seeker_home, menu);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            Intent intent = new Intent(SeekerClickedTodaysFoodInfo.this,MainActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.action_cart){
+            if(var.showCart == true){
+                Intent intent = new Intent(SeekerClickedTodaysFoodInfo.this,Cart.class);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(this, "No item selected", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
         return true;
     }
 }

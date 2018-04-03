@@ -21,7 +21,7 @@ public class SeekerOrderNow extends AppCompatActivity {
     double taxAmount = 0;
 
     private class SeekerOrderNowHolder{
-        TextView orderPrice, orderName1,orderName2, orderTax,orderQuantity, currentUserAddress, totalPrice;
+        TextView orderPrice,orderName2, orderTax,orderQuantity, currentUserAddress, totalPrice;
         Button makePayment1,makePayment2;
         ImageView currentDishImage;
     }
@@ -41,7 +41,6 @@ public class SeekerOrderNow extends AppCompatActivity {
         //initialization
         SeekerOrderNowHolder seekerOrderNowHolder = new SeekerOrderNowHolder();
         seekerOrderNowHolder.orderPrice = (TextView) findViewById(R.id.currentOrderPrice);
-        seekerOrderNowHolder.orderName1 = (TextView) findViewById(R.id.currentOrderName);
         seekerOrderNowHolder.totalPrice = (TextView) findViewById(R.id.currentTotalAmount);
         seekerOrderNowHolder.orderName2 = (TextView) findViewById(R.id.orderDishName);
         seekerOrderNowHolder.orderTax = (TextView) findViewById(R.id.currentOrderTaxandFee);
@@ -55,12 +54,11 @@ public class SeekerOrderNow extends AppCompatActivity {
         taxAmount = Double.parseDouble(foodInfo.dish_price) * 0.1025;
 
         //caculating total price here
-        totalAmount = taxAmount + Double.parseDouble(foodInfo.dish_price);
+        totalAmount = taxAmount + Double.parseDouble(foodInfo.dish_price) + (Double.parseDouble(foodInfo.dish_price) * Double.parseDouble(quantity_number));
 
         //Setting all the variables
         seekerOrderNowHolder.orderPrice.setText(foodInfo.dish_price);
         seekerOrderNowHolder.orderTax.setText(Double.toString(taxAmount));
-        seekerOrderNowHolder.orderName1.setText(foodInfo.dish_name);
         seekerOrderNowHolder.orderName2.setText(foodInfo.dish_name);
         seekerOrderNowHolder.totalPrice.setText(Double.toString(totalAmount));
         seekerOrderNowHolder.currentUserAddress.setText(var.getUserInfo.user_address);

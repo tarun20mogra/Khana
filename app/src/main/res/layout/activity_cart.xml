@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_horizontal_margin"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="#f2f2f2"
+    tools:context="com.example.tarun.khana.Cart">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cart Subtotal"
+                android:padding="8dp"
+                android:id="@+id/cartTotalTextView"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/cartTotalTextView"
+                android:padding="8dp"
+                android:id="@+id/itemCount"
+                android:layout_toRightOf="@+id/cartTotalTextView"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/itemCount"
+                android:layout_toEndOf="@+id/itemCount"
+                android:padding="8dp"
+                android:id="@+id/cartSubtotal"/>
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proceed to checkout"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/uploading_button"
+            android:textColor="@color/white"
+            android:id="@+id/proceedToCheckOut"
+            />
+
+        <View
+            android:id="@+id/viewSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#354e66" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:id="@+id/cartFoodRecyclerView">
+        </android.support.v7.widget.RecyclerView>
+        <View
+            android:id="@+id/viewSeparator2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#354e66" />
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Cart Subtotal :"
+                android:id="@+id/cartSubtotalPriceText"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:text="$120.36"
+                android:id="@+id/cartSubtotalPrice"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Tax And Fee :"
+                android:id="@+id/taxAndFee"
+                android:textSize="18sp"
+                android:layout_below="@+id/cartSubtotalPriceText"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:text="$120.36"
+                android:layout_below="@+id/cartSubtotalPrice"
+                android:id="@+id/taxAndFeePrice"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Application Fee :"
+                android:id="@+id/applicationFee"
+                android:layout_below="@+id/taxAndFee"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:text="$120.36"
+                android:layout_below="@id/taxAndFeePrice"
+                android:id="@+id/applicationFeePrice"
+                android:textSize="18sp"
+                />
+            <View
+                android:id="@+id/viewSeparator3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#354e66"
+                android:layout_below="@id/applicationFee"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/viewSeparator3"
+                android:id="@+id/sumOfAllThePrice"
+                android:text="Total Price :"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/viewSeparator3"
+                android:layout_marginTop="10dp"
+                android:text="$120.36"
+                android:id="@+id/price"
+                android:textSize="18sp"/>
+
+
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>

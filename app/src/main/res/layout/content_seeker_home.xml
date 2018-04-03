@@ -10,8 +10,8 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="6dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="6dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -23,8 +23,7 @@
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapViewForFoodLocations"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                />
+                android:layout_height="450dp" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -33,15 +32,16 @@
             android:layout_height="70dp"
             android:clipChildren="false"
             android:clipToPadding="false">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginTop="5dp"
-                android:text="Look For Food near you"
 
+                android:text="Look For Food near you"
                 android:textColor="#FFF"
-                android:textSize="18sp"
-                android:layout_gravity="center_vertical"/>
+                android:textSize="18sp" />
         </FrameLayout>
 
 
@@ -55,17 +55,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-   <!-- <ListView
-        android:id="@+id/listViewForFood"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <!-- <ListView
+             android:id="@+id/listViewForFood"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
 
 
-        />-->
+             />-->
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewTodaysFood"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recyclerViewTodaysFood"/>
+            android:layout_height="wrap_content" />
 
 
     </android.support.v4.widget.NestedScrollView>
@@ -73,40 +73,5 @@
 </android.support.design.widget.CoordinatorLayout>
 
 
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.tarun.khana.SeekerHome"
-    tools:showIn="@layout/app_bar_seeker_home"
-    android:id="@+id/content_seeker_home">
-
-    <com.google.android.gms.maps.MapView
-                android:id="@+id/mapViewForFoodLocations"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                />
-        <ListView
-            android:id="@+id/listViewForFood"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_below="@+id/mapViewForFoodLocations"
-
-            />
-
-
-
-
-
-
-
-
-</RelativeLayout>-->
 
 

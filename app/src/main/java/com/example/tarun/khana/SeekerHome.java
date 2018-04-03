@@ -2,12 +2,16 @@ package com.example.tarun.khana;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -32,7 +36,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -62,6 +69,8 @@ public class SeekerHome extends AppCompatActivity
     LatLng currentUserAddressLattitudeandLongitude,foodAddress;
     ArrayList<LatLng> foodproviderAddressLattitdeandLongitude = new ArrayList<>();
     GetUserInfo userInfoLogin = new GetUserInfo();
+    double distanceForFoodNearby = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +112,11 @@ public class SeekerHome extends AppCompatActivity
                      Log.v("dish name is", ""+seekerGetTodayFoodInfo[0].provider_address);
                      foodAddress = getLocationFromAddress(SeekerHome.this,seekerGetTodayFoodInfo[0].provider_address);
                      foodproviderAddressLattitdeandLongitude.add(foodAddress);
-                     double distanceForFoodNearby = distance(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude,foodAddress.latitude,foodAddress.longitude);
+                     distanceForFoodNearby = distance(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude,foodAddress.latitude,foodAddress.longitude);
                      Log.v("distance is",""+distanceForFoodNearby);
                      if(distanceForFoodNearby < 30.00){
                          todayFoodNearBy.add(seekerGetTodayFoodInfo[0]);
+                         //gMap.addMarker(new MarkerOptions().position(new LatLng(foodAddress.latitude,foodAddress.longitude)));
                      }
                      createListView();
 
@@ -187,9 +197,21 @@ public class SeekerHome extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.action_logout){
+            Intent intent = new Intent(SeekerHome.this,MainActivity.class);
+            startActivity(intent);
+        }
+       else if(id == R.id.action_cart){
+            if(var.showCart == true){
+                Intent intent = new Intent(SeekerHome.this,Cart.class);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(this, "No item selected", Toast.LENGTH_SHORT).show();
+            }
 
-        Intent intent = new Intent(SeekerHome.this,MainActivity.class);
-        startActivity(intent);
+        }
 
         return true;
     }
@@ -230,7 +252,21 @@ public class SeekerHome extends AppCompatActivity
         gMap = googleMap;
         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         gMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude) , 14.0f) );
+        gMap.addMarker(new MarkerOptions().position(new LatLng(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude)).icon(bitmapDescriptorFromVector(R.drawable.ic_location_dot)));
+        if(distanceForFoodNearby < 30.00){
+            Log.v("distance in marker",""+distanceForFoodNearby);
+            gMap.addMarker(new MarkerOptions().position(new LatLng(foodAddress.latitude,foodAddress.longitude)));
+        }
+    }
 
+    private BitmapDescriptor bitmapDescriptorFromVector(int ic_location_dot) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(SeekerHome.this, ic_location_dot);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
     //Function to calculate longitude and lattitude
@@ -299,4 +335,5 @@ public class SeekerHome extends AppCompatActivity
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(seekerTodaysFoodListAdapter);
     }
+
 }

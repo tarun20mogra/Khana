@@ -53,7 +53,8 @@
         <activity android:name=".SeekerClickedTodaysFoodInfo" />
         <activity android:name=".UserProfile" />
         <activity android:name=".SeekerOrderNow" />
-        <activity android:name=".SeekerMakePayment"></activity>
+        <activity android:name=".SeekerMakePayment" />
+        <activity android:name=".Cart"></activity>
     </application>
 
 </manifest>

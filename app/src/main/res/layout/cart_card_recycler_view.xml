@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/selectedFoodImage"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selectedFoodImage"
+                android:text="Delicious paneer teeka, non vegetarian with low spiciness."
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:id="@+id/foodDetail"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/foodDetail"
+                android:text="Quantity:"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:id="@+id/textQuantity"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/textQuantity"
+                android:layout_below="@id/foodDetail"
+                android:text="2"
+                android:padding="8dp"
+                android:textSize="18sp"
+                android:id="@+id/foodQuantity"
+                android:layout_toRightOf="@+id/textQuantity" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textQuantity"
+                android:layout_marginLeft="5dp"
+                android:text="Delete"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/uploading_button"
+                android:elevation="5dp"
+                android:id="@+id/removeFromCart"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
