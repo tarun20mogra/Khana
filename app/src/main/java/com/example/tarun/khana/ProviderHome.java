@@ -1,5 +1,6 @@
 package com.example.tarun.khana;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -42,6 +44,7 @@ public class ProviderHome extends AppCompatActivity
         EditText dishName, price, addressLine1,addressLine2,city,zipCode,country, quantity;
         RadioGroup type, spiciness;
         Button uploadPhoto, previewOrder;
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class ProviderHome extends AppCompatActivity
         providerHomeHolder.city = (EditText) findViewById(R.id.providerCity);
         providerHomeHolder.zipCode = (EditText) findViewById(R.id.providerZipCode);
         providerHomeHolder.country = (EditText) findViewById(R.id.providerCountry);
+
+
+
         //Setting todays date
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
         Date now = new Date();
@@ -158,7 +164,6 @@ public class ProviderHome extends AppCompatActivity
         });
 
 
-        Toast.makeText(this, ""+userInfoLogin.user_email, Toast.LENGTH_SHORT).show();
         //Setting the tool bar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -171,12 +176,22 @@ public class ProviderHome extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //setting the navigationg text here
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.navBarTextHeading);
+        navUsername.setText(userInfoLogin.user_fullName);
         navigationView.setNavigationItemSelectedListener(this);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         uri = data.getData();
+        if(uri == null){
+            Toast.makeText(this, "Something went wrong try again", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "photo upcloaded", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

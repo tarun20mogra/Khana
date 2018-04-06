@@ -22,8 +22,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -58,6 +60,7 @@ import java.util.Locale;
 public class SeekerHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
     //Global Variables
+
     GoogleMap gMap;
     MapView mapViewForFoodLocation;
     private Singleton var = Singleton.getInstance();
@@ -81,6 +84,7 @@ public class SeekerHome extends AppCompatActivity
         final Bundle intent = getIntent().getExtras();
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         var.getUserInfo = userInfoLogin;
+
         currentUserAddress = userInfoLogin.user_address;
         //First thing first calculate the longitute and lattitude of the current user address
         Log.v("Current Address"," :"+currentUserAddress);
@@ -175,6 +179,10 @@ public class SeekerHome extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //setting the navigationg text here
+        View headerView = navigationView.getHeaderView(0);
+        TextView navUsername = (TextView) headerView.findViewById(R.id.seekerNavBarTextHeading);
+        navUsername.setText(userInfoLogin.user_fullName);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -251,12 +259,20 @@ public class SeekerHome extends AppCompatActivity
         MapsInitializer.initialize(this);
         gMap = googleMap;
         gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        gMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude) , 14.0f) );
+        gMap.moveCamera( CameraUpdateFactory.newLatLngZoom(new LatLng(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude) , 11.0f) );
         gMap.addMarker(new MarkerOptions().position(new LatLng(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude)).icon(bitmapDescriptorFromVector(R.drawable.ic_location_dot)));
-        if(distanceForFoodNearby < 30.00){
-            Log.v("distance in marker",""+distanceForFoodNearby);
-            gMap.addMarker(new MarkerOptions().position(new LatLng(foodAddress.latitude,foodAddress.longitude)));
+        for(int i = 0; i<foodproviderAddressLattitdeandLongitude.size();i++){
+
+            double distance = distance(currentUserAddressLattitudeandLongitude.latitude,currentUserAddressLattitudeandLongitude.longitude,foodproviderAddressLattitdeandLongitude.get(i).latitude,foodproviderAddressLattitdeandLongitude.get(i).longitude);
+
+            if(distance < 30.00){
+
+                Log.v("distance in marker",""+distanceForFoodNearby);
+                gMap.addMarker(new MarkerOptions().position(new LatLng(foodproviderAddressLattitdeandLongitude.get(i).latitude,foodproviderAddressLattitdeandLongitude.get(i).longitude)));
+            }
+
         }
+
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(int ic_location_dot) {

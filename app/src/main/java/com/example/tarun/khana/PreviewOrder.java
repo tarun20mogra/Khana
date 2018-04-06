@@ -126,6 +126,7 @@ public class PreviewOrder extends AppCompatActivity {
                         progressDialog.dismiss();
                         Intent intent2 = new Intent(PreviewOrder.this, ProviderHome.class);
                         intent2.putExtra("username", userInfoLogin);
+                        Toast.makeText(PreviewOrder.this, "Order Uploaded to service", Toast.LENGTH_SHORT).show();
                         startActivity(intent2);
 
                     }
