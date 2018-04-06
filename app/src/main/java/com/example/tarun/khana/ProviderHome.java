@@ -230,6 +230,9 @@ public class ProviderHome extends AppCompatActivity
 
 
         } else if (id == R.id.nav_history) {
+            Intent intent = new Intent(ProviderHome.this,ProviderHistory.class);
+            intent.putExtra("userName",userInfoLogin);
+            startActivity(intent);
 
 
         } else if (id == R.id.nav_logout) {

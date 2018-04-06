@@ -54,7 +54,8 @@
         <activity android:name=".UserProfile" />
         <activity android:name=".SeekerOrderNow" />
         <activity android:name=".SeekerMakePayment" />
-        <activity android:name=".Cart"></activity>
+        <activity android:name=".Cart" />
+        <activity android:name=".ProviderHistory"></activity>
     </application>
 
 </manifest>

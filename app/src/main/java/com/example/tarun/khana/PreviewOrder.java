@@ -60,6 +60,7 @@ public class PreviewOrder extends AppCompatActivity {
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         user_name = intent.getString("username");
         //Initializing all the variables here
+        //-------------------------------------------------------------------------------------------------------------------------------------------//
         progressDialog = new ProgressDialog(PreviewOrder.this);
         PreviewOrderHolder previewOrderHolder = new PreviewOrderHolder();
         previewOrderHolder.imageView = (ImageView) findViewById(R.id.orderPhoto);
@@ -86,6 +87,8 @@ public class PreviewOrder extends AppCompatActivity {
         previewOrderHolder.provider_address.setText(orderPreviewSaveInfo.provider_address);
         previewOrderHolder.dish_spiciness.setText(orderPreviewSaveInfo.dish_spiciness);
         previewOrderHolder.dish_type.setText(orderPreviewSaveInfo.dist_type);
+
+        //-------------------------------------------------------------------------------------------------------------------------------------------//
         //on submit of the order saving it to the firebase
         previewOrderHolder.submitOrder.setOnClickListener(new View.OnClickListener() {
             @Override
