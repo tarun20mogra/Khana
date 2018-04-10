@@ -39,13 +39,13 @@ public class Cart extends AppCompatActivity {
         // calculating total price
         itemCount.setText("("+var.cartFoodInfo.size()+" items) :");
         for(int i = 0 ; i < var.cartFoodInfo.size();i++){
-            cartSubtotalPrice = cartSubtotalPrice + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i)));
+            cartSubtotalPrice = (long) (cartSubtotalPrice + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
         }
         //Calculatinf the tax, applying 10.25% tax on the whole food
-        tax = 0.10 * cartSubtotalPrice;
+        tax = (long)(0.10 * cartSubtotalPrice);
 
         //calculating total price
-        price = cartSubtotalPrice + tax + fee;
+        price = (long)(cartSubtotalPrice + tax + fee);
 
 
         // Setting up all the texts
@@ -57,10 +57,13 @@ public class Cart extends AppCompatActivity {
 
 
         //setting recycler view here
-        CartListAdapter cartListAdapter = new CartListAdapter(Cart.this);
-        cartFoodList.setLayoutManager(new LinearLayoutManager(Cart.this));
-        cartFoodList.setNestedScrollingEnabled(false);
-        cartFoodList.setAdapter(cartListAdapter);
+        for (int i = 0; i<var.cartFoodInfo.size();i++){
+            CartListAdapter cartListAdapter = new CartListAdapter(Cart.this);
+            cartFoodList.setLayoutManager(new LinearLayoutManager(Cart.this));
+            cartFoodList.setNestedScrollingEnabled(false);
+            cartFoodList.setAdapter(cartListAdapter);
+
+        }
 
         //make payment button click listener
         checkout.setOnClickListener(new View.OnClickListener() {

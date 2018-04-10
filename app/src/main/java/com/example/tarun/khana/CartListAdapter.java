@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,14 +34,19 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartlistAdapterHolder holder, final int position) {
-        Glide.with(context).load(var.cartFoodImageUrl.get(position)).into(holder.foodImage);
-        holder.foodDetails.setText("Delicious "+ var.cartFoodInfo.get(position).dish_name +", " +var.cartFoodInfo.get(position).dist_type+ " with "+ var.cartFoodInfo.get(position).dish_spiciness + ".");
-        holder.foodQuantity.setText(var.quantity.get(position));
+    public void onBindViewHolder(@NonNull final CartlistAdapterHolder holder, final int position) {
+        Log.v("cart",""+var.cartFoodInfo.size());
+
+            Glide.with(context).load(var.cartFoodImageUrl.get(position)).into(holder.foodImage);
+            holder.foodDetails.setText("Delicious "+ var.cartFoodInfo.get(position).dish_name +", " +var.cartFoodInfo.get(position).dist_type+ " with "+ var.cartFoodInfo.get(position).dish_spiciness + ".");
+            holder.foodQuantity.setText(var.quantity.get(position));
+
+
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                var.cartFoodInfo.remove(position);
+
+                                    var.cartFoodInfo.remove(position);
                 var.cartFoodImageUrl.remove(position);
                 var.quantity.remove(position);
                 if(var.quantity.isEmpty() && var.cartFoodImageUrl.isEmpty() && var.cartFoodInfo.isEmpty()){
@@ -51,11 +57,12 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
                     context.startActivity(intent);
                 }
                 else {
-                    Intent intent = new Intent(context,Cart.class);
-                    context.startActivity(intent);
+                    Toast.makeText(context, "Else", Toast.LENGTH_SHORT).show();
+                    notifyDataSetChanged();
                 }
             }
         });
+
     }
 
     @Override

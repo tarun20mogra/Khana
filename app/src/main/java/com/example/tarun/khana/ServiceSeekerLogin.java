@@ -30,13 +30,6 @@ import java.io.IOException;
 
 
 public class ServiceSeekerLogin extends Fragment {
-    String userNameSeeker = null, passwordSeeker = null;
-    ServiceSeekerLogin context = this;
-    GetUserInfo userInfo [] = null;
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/seeker");
-    private boolean flag = false;
-
-
     private class SeekerLoginHolder{
         EditText seekerUserName;
         EditText seekerPassword;
@@ -45,11 +38,21 @@ public class ServiceSeekerLogin extends Fragment {
         TextView forgotPasswordSeeker;
     }
 
+
+    String userNameSeeker = null, passwordSeeker = null;
+    ServiceSeekerLogin context = this;
+    GetUserInfo userInfo [] = null;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/seeker");
+    private boolean flag = false;
+    final SeekerLoginHolder seekerLoginHolder = new SeekerLoginHolder();
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.service_seeker, container, false);
-        final SeekerLoginHolder seekerLoginHolder = new SeekerLoginHolder();
 
 
         seekerLoginHolder.seekerUserName = (EditText) rootView.findViewById(R.id.seekerUserName);
@@ -129,7 +132,15 @@ public class ServiceSeekerLogin extends Fragment {
 
         }
 
+
     });
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        seekerLoginHolder.seekerUserName.setText("");
+        seekerLoginHolder.seekerPassword.setText("");
     }
 
 }

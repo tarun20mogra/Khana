@@ -23,7 +23,9 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"
+            android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,30 +34,41 @@
         </activity>
         <activity
             android:name=".ForgotPassword"
-            android:windowSoftInputMode="adjustResize|adjustPan" />
+            android:windowSoftInputMode="adjustResize|adjustPan"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".SignUp"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".ProviderHome"
             android:label="@string/title_activity_provider_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PreviewOrder" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".PreviewOrder"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".SeekerHome"
             android:label="@string/title_activity_seeker_home"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA5xOtVTTcD4TZMp2vRbOwnBOni3HLU7EM" />
 
-        <activity android:name=".SeekerClickedTodaysFoodInfo" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".SeekerOrderNow" />
-        <activity android:name=".SeekerMakePayment" />
-        <activity android:name=".Cart" />
-        <activity android:name=".ProviderHistory"></activity>
+        <activity android:name=".SeekerClickedTodaysFoodInfo"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".UserProfile"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".SeekerOrderNow"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".SeekerMakePayment"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".Cart"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".ProviderHistory"
+            android:launchMode="singleInstance"/>
     </application>
 
 </manifest>

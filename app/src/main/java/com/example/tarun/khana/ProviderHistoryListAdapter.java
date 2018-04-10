@@ -50,9 +50,7 @@ public class ProviderHistoryListAdapter extends RecyclerView.Adapter<ProviderHis
         holder.dishQuantity.setText(seekerGetTodayFoodInfo.get(position).dish_quantity);
         holder.date.setText(seekerGetTodayFoodInfo.get(position).today_date);
 
-/*
-        Log.v("values",""+seekerGetTodayFoodInfo.get(position).dish_name+"...."+seekerGetTodayFoodInfo.get(position).dish_quantity+"...."+seekerGetTodayFoodInfo.get(position).today_date);
-*/
+
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         StorageReference filepath = storageReference.child(currentUserInfo.user_name).child(seekerGetTodayFoodInfo.get(position).dish_name + "_" + seekerGetTodayFoodInfo.get(position).today_date);

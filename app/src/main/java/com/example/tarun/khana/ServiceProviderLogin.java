@@ -25,9 +25,6 @@ import java.io.Serializable;
 
 
 public class ServiceProviderLogin extends Fragment {
-    ServiceProviderLogin context = this;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/provider");
-
     private class ProviderLoginHolder{
         EditText providerUserName;
         EditText providerPassword;
@@ -35,12 +32,18 @@ public class ServiceProviderLogin extends Fragment {
         Button signUpProvider;
         TextView forgotPasswordProvider;
     }
+
+
+    ServiceProviderLogin context = this;
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/userInfo/provider");
+    final ProviderLoginHolder providerLoginHolder = new ProviderLoginHolder();
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.service_provider, container, false);
-        final ProviderLoginHolder providerLoginHolder = new ProviderLoginHolder();
 
         //initializing all the variables of the providerLoginHolder
         providerLoginHolder.providerUserName = (EditText) rootView.findViewById(R.id.providerUserName);
@@ -119,5 +122,12 @@ public class ServiceProviderLogin extends Fragment {
         });
 
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        providerLoginHolder.providerUserName.setText("");
+        providerLoginHolder.providerPassword.setText("");
+    }
+
 
 }

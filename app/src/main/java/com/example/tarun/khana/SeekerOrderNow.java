@@ -19,6 +19,7 @@ public class SeekerOrderNow extends AppCompatActivity {
     private Singleton var = Singleton.getInstance();
     double totalAmount = 0;
     double taxAmount = 0;
+    double applicationFee = 3.00;
 
     private class SeekerOrderNowHolder{
         TextView orderPrice,orderName2, orderTax,orderQuantity, currentUserAddress, totalPrice;
@@ -51,10 +52,10 @@ public class SeekerOrderNow extends AppCompatActivity {
         seekerOrderNowHolder.orderQuantity = (TextView) findViewById(R.id.orderDishQuantity) ;
 
         //calculating the tax here
-        taxAmount = Double.parseDouble(foodInfo.dish_price) * 0.1025;
+        taxAmount = (long)(Double.parseDouble(foodInfo.dish_price) * 0.10);
 
         //caculating total price here
-        totalAmount = taxAmount + Double.parseDouble(foodInfo.dish_price) + (Double.parseDouble(foodInfo.dish_price) * Double.parseDouble(quantity_number));
+        totalAmount = (long)(taxAmount + applicationFee + (Double.parseDouble(foodInfo.dish_price) * Double.parseDouble(quantity_number)));
 
         //Setting all the variables
         seekerOrderNowHolder.orderPrice.setText(foodInfo.dish_price);

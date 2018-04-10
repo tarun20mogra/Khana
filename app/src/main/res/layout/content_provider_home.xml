@@ -59,7 +59,7 @@
 
                 android:inputType="number"
                 android:ems="10"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="18dp"
                 android:background="@android:color/transparent"
                 />
             <View
@@ -75,7 +75,7 @@
 
                 android:ems="10"
                 android:inputType="number"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="18dp"
                 android:background="@android:color/transparent"
                 />
             <View
@@ -102,6 +102,7 @@
                 android:ems="10"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
+                android:layout_marginTop="18dp"
                 />
             <View
                 android:layout_width="match_parent"
@@ -112,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Address Line 2"
                 android:id="@+id/addressProviderLine2"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:ems="10"
 
                 android:background="@android:color/transparent"
@@ -129,7 +130,7 @@
                 android:hint="City"
                 android:ems="10"
 
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
                 />
@@ -144,7 +145,7 @@
                 android:hint="Zip Code"
                 android:ems="10"
                 android:inputType="number"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
                 />
@@ -158,7 +159,7 @@
                 android:hint="Country"
                 android:id="@+id/providerCountry"
                 android:ems="10"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="18dp"
                 android:background="@android:color/transparent"
                 android:padding="8dp"
                 />
@@ -174,7 +175,7 @@
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:padding="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 />
 
             <RadioGroup
