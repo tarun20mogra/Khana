@@ -233,6 +233,7 @@ public class SeekerHome extends AppCompatActivity
 
        if (id == R.id.nav_home) {
            Intent intent = new Intent(SeekerHome.this, SeekerHome.class);
+           intent.putExtra("username",userInfoLogin);
            startActivity(intent);
 
         } else if (id == R.id.nav_profile) {
@@ -242,6 +243,8 @@ public class SeekerHome extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_history) {
+           Intent intent = new Intent(SeekerHome.this,SeekerHistory.class);
+           startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
            Intent intent = new Intent(SeekerHome.this,MainActivity.class);

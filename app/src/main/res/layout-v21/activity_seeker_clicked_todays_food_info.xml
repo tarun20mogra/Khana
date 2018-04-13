@@ -61,13 +61,13 @@
             android:clipChildren="false"
             android:clipToPadding="false">
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
 
-                android:id="@+id/currentClickedFoodName"
-                android:textColor="#FFF"
-                android:textSize="18sp"
+                    android:id="@+id/currentClickedFoodName"
+                    android:textColor="#FFF"
+                    android:textSize="18sp"
                 android:layout_gravity="center_vertical"/>
         </FrameLayout>
 

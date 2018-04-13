@@ -4,19 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
+
     android:background="#f2f2f2"
     tools:context="com.example.tarun.khana.Cart">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_arrow_back_black_24dp"
+                android:text="Cart"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:drawablePadding="12dp"
+                android:clickable="true"
+                android:id="@+id/backButton"/>
+        </android.support.v7.widget.Toolbar>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,6 +68,8 @@
             android:layout_height="wrap_content"
             android:text="Proceed to checkout"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/uploading_button"
             android:textColor="@color/white"
             android:id="@+id/proceedToCheckOut"
@@ -55,17 +80,23 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="#354e66" />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/cartFoodRecyclerView">
         </android.support.v7.widget.RecyclerView>
         <View
             android:id="@+id/viewSeparator2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="#354e66" />
         <RelativeLayout
@@ -73,6 +104,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             >
             <TextView
                 android:layout_width="wrap_content"

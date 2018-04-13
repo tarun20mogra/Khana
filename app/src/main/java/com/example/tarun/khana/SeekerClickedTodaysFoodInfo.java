@@ -1,7 +1,9 @@
 package com.example.tarun.khana;
 
 import android.content.Intent;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -33,8 +35,9 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
 
     private class SeekerClickedTodaysFoodInfoHolder {
-        ImageView currentClickedFoodImage;
-        TextView currentClickedFoodName, currentClickedFoodPrice, currentClickedFoodQuantity, providerAddress, descriptionOfTheFood;
+        ImageView currentClickedFoodImage ;
+
+        TextView currentClickedFoodName, currentClickedFoodPrice, currentClickedFoodQuantity, providerAddress, descriptionOfTheFood, backbutton;
         ElegantNumberButton quantity_of_order;
         Button order_now, add_to_cart;
 
@@ -65,7 +68,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.quantity_of_order = (ElegantNumberButton) findViewById(R.id.dish_quantity);
         seekerClickedTodaysFoodInfoHolder.order_now = (Button) findViewById(R.id.orderNowButton);
         seekerClickedTodaysFoodInfoHolder.add_to_cart = (Button) findViewById(R.id.addToCart);
-
+        seekerClickedTodaysFoodInfoHolder.backbutton = (TextView) findViewById(R.id.backButton);
         //Setting all the views here
         //Image of the current clicked food
         Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(list.get(i).user_name + "_" + list.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
@@ -122,6 +125,18 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
             }
         });
+        seekerClickedTodaysFoodInfoHolder.backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this,SeekerHome.class);
+                intent1.putExtra("username",currentUserInfo);
+                startActivity(intent1);
+            }
+        });
+
+
+
+
     }
 
 
@@ -151,5 +166,6 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
         return true;
     }
+
 
 }

@@ -22,7 +22,7 @@ public class SeekerOrderNow extends AppCompatActivity {
     double applicationFee = 3.00;
 
     private class SeekerOrderNowHolder{
-        TextView orderPrice,orderName2, orderTax,orderQuantity, currentUserAddress, totalPrice;
+        TextView orderPrice,orderName2, orderTax,orderQuantity, currentUserAddress, totalPrice, backButton;
         Button makePayment1,makePayment2;
         ImageView currentDishImage;
     }
@@ -34,8 +34,8 @@ public class SeekerOrderNow extends AppCompatActivity {
         //getting all the info from the previous activity
         Bundle intent = getIntent().getExtras();
         final SeekerGetTodayFoodInfo foodInfo = (SeekerGetTodayFoodInfo) intent.getSerializable("food info");
-        String image = intent.getString("image");
-        String quantity_number = intent.getString("order_quantity");
+        final String image = intent.getString("image");
+        final String quantity_number = intent.getString("order_quantity");
         //final GetUserInfo currentUserInfo =  intent.getParcelable("current_user_info");
         Log.v("address",""+var.getUserInfo.user_address);
 
@@ -50,6 +50,7 @@ public class SeekerOrderNow extends AppCompatActivity {
         seekerOrderNowHolder.makePayment2 = (Button) findViewById(R.id.makePayment2);
         seekerOrderNowHolder.currentDishImage = (ImageView) findViewById(R.id.currentItemImage);
         seekerOrderNowHolder.orderQuantity = (TextView) findViewById(R.id.orderDishQuantity) ;
+        seekerOrderNowHolder.backButton = (TextView) findViewById(R.id.backButton);
 
         //calculating the tax here
         taxAmount = (long)(Double.parseDouble(foodInfo.dish_price) * 0.10);
@@ -74,6 +75,9 @@ public class SeekerOrderNow extends AppCompatActivity {
         seekerOrderNowHolder.makePayment1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                var.cartFoodInfo.add(foodInfo);
+                var.quantity.add(quantity_number);
+                var.cartFoodImageUrl.add(image);
                 Intent intent1 = new Intent(SeekerOrderNow.this,SeekerMakePayment.class);
                 intent1.putExtra("payment Price",totalAmount);
                 startActivity(intent1);
@@ -82,8 +86,21 @@ public class SeekerOrderNow extends AppCompatActivity {
         seekerOrderNowHolder.makePayment2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                var.cartFoodInfo.add(foodInfo);
+                var.quantity.add(quantity_number);
+                var.cartFoodImageUrl.add(image);
                 Intent intent1 = new Intent(SeekerOrderNow.this,SeekerMakePayment.class);
                 intent1.putExtra("payment Price",totalAmount);
+                startActivity(intent1);
+            }
+        });
+
+        seekerOrderNowHolder.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(SeekerOrderNow.this,SeekerHome.class);
+                intent1.putExtra("username",var.getUserInfo);
                 startActivity(intent1);
             }
         });

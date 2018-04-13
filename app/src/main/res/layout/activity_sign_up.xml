@@ -39,7 +39,7 @@
                 android:textColorHint="#ffffff"
 
                 android:maxLines="1"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_person_white_24dp"
                 />
             <View
                 android:layout_width="match_parent"

@@ -156,8 +156,9 @@ public class UserProfile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        uri = data.getData();
+
         try {
+            uri = data.getData();
             bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             Bitmap resized = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
             Bitmap conv_bm = getRoundedRectBitmap(resized, 100);

@@ -23,7 +23,7 @@
 
                 android:layout_width="240dp"
                 android:layout_height="120dp"
-                android:src="@drawable/ic_notifications_black_42dp"
+                android:src="@drawable/logo_black"
                 android:layout_gravity="center_horizontal"
                 android:padding="16dp"
                 android:layout_marginTop="30dp"

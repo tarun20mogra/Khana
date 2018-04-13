@@ -17,15 +17,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:clearTaskOnLaunch="true"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"
-            android:clearTaskOnLaunch="true">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,41 +33,49 @@
         </activity>
         <activity
             android:name=".ForgotPassword"
-            android:windowSoftInputMode="adjustResize|adjustPan"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity
             android:name=".SignUp"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ProviderHome"
             android:label="@string/title_activity_provider_home"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".PreviewOrder"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PreviewOrder"
+            android:launchMode="singleInstance" />
         <activity
             android:name=".SeekerHome"
             android:label="@string/title_activity_seeker_home"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA5xOtVTTcD4TZMp2vRbOwnBOni3HLU7EM" />
 
-        <activity android:name=".SeekerClickedTodaysFoodInfo"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".UserProfile"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".SeekerOrderNow"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".SeekerMakePayment"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".Cart"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".ProviderHistory"
-            android:launchMode="singleInstance"/>
+        <activity
+            android:name=".SeekerClickedTodaysFoodInfo"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".UserProfile"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".SeekerOrderNow"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".SeekerMakePayment"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".Cart"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".ProviderHistory"
+            android:launchMode="singleInstance" />
+        <activity android:name=".SeekerHistory"></activity>
     </application>
 
-</manifest>
+</manifest> <!-- android:roundIcon="@mipmap/ic_launcher_round" -->

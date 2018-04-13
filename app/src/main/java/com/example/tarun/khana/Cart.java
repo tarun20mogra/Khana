@@ -34,6 +34,7 @@ public class Cart extends AppCompatActivity {
         TextView applicationFee = (TextView) findViewById(R.id.applicationFeePrice);
         TextView totalPrice = (TextView) findViewById(R.id.price);
         Button checkout = (Button) findViewById(R.id.proceedToCheckOut);
+        TextView backButton = (TextView) findViewById(R.id.backButton);
 
         RecyclerView cartFoodList = (RecyclerView) findViewById(R.id.cartFoodRecyclerView);
         // calculating total price
@@ -73,6 +74,15 @@ public class Cart extends AppCompatActivity {
                 intent.putExtra("payment Price",price);
                 startActivity(intent);
 
+            }
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(Cart.this,SeekerHome.class);
+                intent1.putExtra("username",var.getUserInfo);
+                startActivity(intent1);
             }
         });
 

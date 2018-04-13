@@ -17,10 +17,15 @@ import android.widget.Toast;
 import com.craftman.cardform.Card;
 import com.craftman.cardform.CardForm;
 import com.craftman.cardform.OnPayBtnClickListner;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SeekerMakePayment extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
-
+    private Singleton var = Singleton.getInstance();
     String phoneNo = "7329251694";
     String sms = "Hi there";
     @Override
@@ -32,15 +37,49 @@ public class SeekerMakePayment extends AppCompatActivity {
         double totalAmount = (double) intent.get("payment Price");
         CardForm cardForm = (CardForm) findViewById(R.id.paymentCardForm);
         TextView textView = (TextView) findViewById(R.id.payment_amount);
+        TextView backbutton = (TextView) findViewById(R.id.backButton);
         Button button =(Button) findViewById(R.id.btn_pay);
         button.setBackgroundResource(R.drawable.preview_button);
         button.setText(R.string.payment);
         textView.setText(Double.toString(totalAmount));
 
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent1 = new Intent(SeekerMakePayment.this,SeekerHome.class);
+                intent1.putExtra("username",var.getUserInfo);
+                startActivity(intent1);
+            }
+        });
+
         cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
             @Override
             public void onClick(Card card) {
                 Toast.makeText(SeekerMakePayment.this, "Payment Made", Toast.LENGTH_SHORT).show();
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("TodaysFood").child("2018-03-23");
+                Log.v("database Refrence",""+databaseReference);
+                final DatabaseReference seekerFoodOrderHistory = FirebaseDatabase.getInstance().getReference();
+                for( int i =0; i<var.cartFoodInfo.size();i++ ){
+                    final int position = i;
+                    final String quantity = var.quantity.get(i);
+                    seekerFoodOrderHistory.child("Seeker_History").child(var.getUserInfo.user_name).push().setValue(new SaveSeekerOrderFood(var.cartFoodInfo.get(i).dish_name,var.quantity.get(i),var.cartFoodInfo.get(i).dish_price,"2012-23-12"));
+                    databaseReference.child(var.cartFoodInfo.get(i).user_name+"_"+var.cartFoodInfo.get(i).dish_name).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String previousQuantity = dataSnapshot.child("dish_quantity").getValue(String.class);
+                            Log.v("previous quantity",""+previousQuantity);
+                            Log.v("quantity ordered",""+quantity);
+                            int newQuantity = Integer.parseInt(previousQuantity) - Integer.parseInt(quantity);
+                            databaseReference.child(var.cartFoodInfo.get(position).user_name+"_"+var.cartFoodInfo.get(position).dish_name).child("dish_quantity").setValue(String.valueOf(newQuantity));
+
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
 
                 if (ContextCompat.checkSelfPermission(SeekerMakePayment.this,
                         android.Manifest.permission.SEND_SMS)
@@ -66,8 +105,9 @@ public class SeekerMakePayment extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     SmsManager smsManager = SmsManager.getDefault();
                     smsManager.sendTextMessage(phoneNo, null, sms, null, null);
-                    Toast.makeText(getApplicationContext(), "Order Placed",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Order Placed", Toast.LENGTH_LONG).show();
+
+
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Some error occurred try again after sometime.", Toast.LENGTH_LONG).show();

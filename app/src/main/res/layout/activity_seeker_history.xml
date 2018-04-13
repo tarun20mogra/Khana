@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-    tools:context="com.example.tarun.khana.SeekerMakePayment">
+    android:layout_height="wrap_content"
+    tools:context="com.example.tarun.khana.SeekerHistory">
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -19,22 +18,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_arrow_back_black_24dp"
-            android:text="Payment"
+            android:text="History"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:drawablePadding="12dp"
             android:clickable="true"
-            android:textColor="@color/white"
             android:id="@+id/backButton"/>
     </android.support.v7.widget.Toolbar>
-
-
-    <com.craftman.cardform.CardForm
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/paymentCardForm"
+        android:id="@+id/seekeHistoryList"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="12dp">
-
-    </com.craftman.cardform.CardForm>
-
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 </RelativeLayout>
