@@ -23,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SeekerMakePayment extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Singleton var = Singleton.getInstance();
@@ -46,24 +49,26 @@ public class SeekerMakePayment extends AppCompatActivity {
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SeekerMakePayment.super.onBackPressed();
 
-                Intent intent1 = new Intent(SeekerMakePayment.this,SeekerHome.class);
-                intent1.putExtra("username",var.getUserInfo);
-                startActivity(intent1);
             }
         });
 
         cardForm.setPayBtnClickListner(new OnPayBtnClickListner() {
             @Override
             public void onClick(Card card) {
+                //Setting todays date
+                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+                final Date now = new Date();
+                final String strDate = sdfDate.format(now);
                 Toast.makeText(SeekerMakePayment.this, "Payment Made", Toast.LENGTH_SHORT).show();
-                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("TodaysFood").child("2018-03-23");
-                Log.v("database Refrence",""+databaseReference);
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("TodaysFood").child(strDate);
+
                 final DatabaseReference seekerFoodOrderHistory = FirebaseDatabase.getInstance().getReference();
                 for( int i =0; i<var.cartFoodInfo.size();i++ ){
                     final int position = i;
                     final String quantity = var.quantity.get(i);
-                    seekerFoodOrderHistory.child("Seeker_History").child(var.getUserInfo.user_name).push().setValue(new SaveSeekerOrderFood(var.cartFoodInfo.get(i).dish_name,var.quantity.get(i),var.cartFoodInfo.get(i).dish_price,"2012-23-12"));
+                    seekerFoodOrderHistory.child("Seeker_History").child(var.getUserInfo.user_name).push().setValue(new SaveSeekerOrderFood(var.cartFoodInfo.get(i).dish_name,var.quantity.get(i),var.cartFoodInfo.get(i).dish_price,strDate));
                     databaseReference.child(var.cartFoodInfo.get(i).user_name+"_"+var.cartFoodInfo.get(i).dish_name).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {

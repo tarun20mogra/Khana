@@ -1,5 +1,4 @@
 package com.example.tarun.khana;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,9 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,11 +20,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,14 +35,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -60,16 +52,19 @@ import java.util.Locale;
 public class SeekerHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback{
     //Global Variables
-
     GoogleMap gMap;
+    int count;
     MapView mapViewForFoodLocation;
     private Singleton var = Singleton.getInstance();
     RecyclerView recyclerView;
     String currentUserAddress = null;
     DatabaseReference databaseReference;
+    // this is for getting the object from the firebase
     SeekerGetTodayFoodInfo [] seekerGetTodayFoodInfo = null;
+    // this is to save the information as an object of the food within 30 miles
     ArrayList<SeekerGetTodayFoodInfo> todayFoodNearBy = new ArrayList<>();
     LatLng currentUserAddressLattitudeandLongitude,foodAddress;
+    //This is for all the addresses within 30 miles of  radius
     ArrayList<LatLng> foodproviderAddressLattitdeandLongitude = new ArrayList<>();
     GetUserInfo userInfoLogin = new GetUserInfo();
     double distanceForFoodNearby = 0;
@@ -77,6 +72,7 @@ public class SeekerHome extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        count = 0;
         //Setting the view for the activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seeker_home);
@@ -85,11 +81,10 @@ public class SeekerHome extends AppCompatActivity
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         var.getUserInfo = userInfoLogin;
 
-        currentUserAddress = userInfoLogin.user_address;
+
         //First thing first calculate the longitute and lattitude of the current user address
-        Log.v("Current Address"," :"+currentUserAddress);
+        currentUserAddress = userInfoLogin.user_address;
         currentUserAddressLattitudeandLongitude = getLocationFromAddress(SeekerHome.this,currentUserAddress);
-        Log.v("latt and long is"," :"+currentUserAddressLattitudeandLongitude);
         //setting the Recycler View here
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewTodaysFood);
 
@@ -98,7 +93,7 @@ public class SeekerHome extends AppCompatActivity
         final Date now = new Date();
         final String strDate = sdfDate.format(now);
         //Database Reference
-         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/TodaysFood/2018-03-23");//strDate
+         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://khana-7272.firebaseio.com/TodaysFood/"+strDate);//strDate
          databaseReference.addChildEventListener(new ChildEventListener() {
              @Override
              public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -120,7 +115,8 @@ public class SeekerHome extends AppCompatActivity
                      Log.v("distance is",""+distanceForFoodNearby);
                      if(distanceForFoodNearby < 30.00){
                          todayFoodNearBy.add(seekerGetTodayFoodInfo[0]);
-                         //gMap.addMarker(new MarkerOptions().position(new LatLng(foodAddress.latitude,foodAddress.longitude)));
+                         var.todayFoodInfoHashMap.put(count,seekerGetTodayFoodInfo[0]);
+                        count++;
                      }
                      createListView();
 
@@ -184,6 +180,7 @@ public class SeekerHome extends AppCompatActivity
         TextView navUsername = (TextView) headerView.findViewById(R.id.seekerNavBarTextHeading);
         navUsername.setText(userInfoLogin.user_fullName);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override

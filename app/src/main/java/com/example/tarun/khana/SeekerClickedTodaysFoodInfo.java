@@ -1,17 +1,8 @@
 package com.example.tarun.khana;
 
 import android.content.Intent;
-import android.os.Build;
-import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,10 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -36,7 +25,6 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
 
     private class SeekerClickedTodaysFoodInfoHolder {
         ImageView currentClickedFoodImage ;
-
         TextView currentClickedFoodName, currentClickedFoodPrice, currentClickedFoodQuantity, providerAddress, descriptionOfTheFood, backbutton;
         ElegantNumberButton quantity_of_order;
         Button order_now, add_to_cart;
@@ -51,7 +39,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         //getting the intent bundle from the previous activity
         final Bundle intent = getIntent().getExtras();
         currentUserInfo = intent.getParcelable("current_user_info");
-        final ArrayList<SeekerGetTodayFoodInfo> list = (ArrayList<SeekerGetTodayFoodInfo>) intent.getSerializable("todays_food_info");
+
         //ArrayList<String> url =  getIntent().getStringArrayListExtra("image_of_food_clicked");
 
         final int i = intent.getInt("current_value");
@@ -71,13 +59,13 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.backbutton = (TextView) findViewById(R.id.backButton);
         //Setting all the views here
         //Image of the current clicked food
-        Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(list.get(i).user_name + "_" + list.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
+        Glide.with(SeekerClickedTodaysFoodInfo.this).load(var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name)).into(seekerClickedTodaysFoodInfoHolder.currentClickedFoodImage);
         //Name,quantity,price,address of the current clicked food
-        seekerClickedTodaysFoodInfoHolder.currentClickedFoodName.setText(list.get(i).dish_name);
-        seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(list.get(i).dish_quantity);
-        seekerClickedTodaysFoodInfoHolder.currentClickedFoodPrice.setText("$" + list.get(i).dish_price);
-        seekerClickedTodaysFoodInfoHolder.providerAddress.setText(list.get(i).provider_address);
-        seekerClickedTodaysFoodInfoHolder.descriptionOfTheFood.setText("This is as delicious as it looks in the photo. It is " + list.get(i).dist_type + " dish coocked properly and is mouthwatering taste.It is " + list.get(i).dish_spiciness + ".");
+        seekerClickedTodaysFoodInfoHolder.currentClickedFoodName.setText(var.todayFoodInfoHashMap.get(i).dish_name);
+        seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(var.todayFoodInfoHashMap.get(i).dish_quantity);
+        seekerClickedTodaysFoodInfoHolder.currentClickedFoodPrice.setText("$" + var.todayFoodInfoHashMap.get(i).dish_price);
+        seekerClickedTodaysFoodInfoHolder.providerAddress.setText(var.todayFoodInfoHashMap.get(i).provider_address);
+        seekerClickedTodaysFoodInfoHolder.descriptionOfTheFood.setText("This is as delicious as it looks in the photo. It is " + var.todayFoodInfoHashMap.get(i).dist_type + " dish coocked properly and is mouthwatering taste.It is " + var.todayFoodInfoHashMap.get(i).dish_spiciness + ".");
 
         seekerClickedTodaysFoodInfoHolder.quantity_of_order.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
@@ -88,14 +76,14 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.order_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(quantity_number) > Integer.parseInt(list.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + list.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(quantity_number) == 0) {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
                 } else {
-                    image = var.urlOfTodaysFoodImage.get(list.get(i).user_name + "_" + list.get(i).dish_name);
+                    image = var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name);
                     Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this, SeekerOrderNow.class);
-                    intent1.putExtra("food info", (Serializable) list.get(i));
+                    intent1.putExtra("food info", (Serializable) var.todayFoodInfoHashMap.get(i));
                     intent1.putExtra("image", image);
                     intent1.putExtra("current_user_info", currentUserInfo);
                     intent1.putExtra("order_quantity", quantity_number);
@@ -108,15 +96,15 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(quantity_number) > Integer.parseInt(list.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + list.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
                 } else if (Integer.parseInt(quantity_number) == 0) {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
                 } else {
 
                     var.showCart = true;
-                    var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(list.get(i).user_name + "_" + list.get(i).dish_name));
-                    var.cartFoodInfo.add(list.get(i));
+                    var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name));
+                    var.cartFoodInfo.add(var.todayFoodInfoHashMap.get(i));
                     var.quantity.add(quantity_number);
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Added to cart", Toast.LENGTH_SHORT).show();
 
@@ -128,9 +116,9 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this,SeekerHome.class);
-                intent1.putExtra("username",currentUserInfo);
-                startActivity(intent1);
+
+                SeekerClickedTodaysFoodInfo.super.onBackPressed();
+
             }
         });
 

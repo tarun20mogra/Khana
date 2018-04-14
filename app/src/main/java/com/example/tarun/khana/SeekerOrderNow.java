@@ -98,10 +98,7 @@ public class SeekerOrderNow extends AppCompatActivity {
         seekerOrderNowHolder.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent1 = new Intent(SeekerOrderNow.this,SeekerHome.class);
-                intent1.putExtra("username",var.getUserInfo);
-                startActivity(intent1);
+                SeekerOrderNow.super.onBackPressed();
             }
         });
 
