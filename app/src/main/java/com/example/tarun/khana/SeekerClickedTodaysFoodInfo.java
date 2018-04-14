@@ -116,7 +116,6 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 SeekerClickedTodaysFoodInfo.super.onBackPressed();
 
             }

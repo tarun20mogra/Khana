@@ -69,7 +69,6 @@ public class ProviderHome extends AppCompatActivity
         providerHomeHolder.country = (EditText) findViewById(R.id.providerCountry);
 
 
-
         //Setting todays date
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
         Date now = new Date();

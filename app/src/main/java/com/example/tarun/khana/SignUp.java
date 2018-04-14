@@ -123,9 +123,7 @@ public class SignUp extends AppCompatActivity {
         signUpHolder.loginBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent1 = new Intent(context,MainActivity.class);
-                startActivity(intent1);
+                SignUp.super.onBackPressed();
             }
         });
     }
