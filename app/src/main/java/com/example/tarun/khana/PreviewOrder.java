@@ -36,6 +36,7 @@ public class PreviewOrder extends AppCompatActivity {
     //for Image storage to firebase
     StorageReference storageReferenceForProvider = FirebaseStorage.getInstance().getReference();
     private ProgressDialog progressDialog;
+    private Singleton var = Singleton.getInstance();
 
 
     //class holding all the view variables for preview order view
@@ -127,6 +128,7 @@ public class PreviewOrder extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         progressDialog.dismiss();
+                        var.onResumeFlag = false;
                         Intent intent2 = new Intent(PreviewOrder.this, ProviderHome.class);
                         intent2.putExtra("username", userInfoLogin);
                         Toast.makeText(PreviewOrder.this, "Order Uploaded to service", Toast.LENGTH_SHORT).show();

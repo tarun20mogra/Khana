@@ -28,7 +28,7 @@ import java.util.Date;
 
 public class ProviderHome extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private Singleton var = Singleton.getInstance();
     private final static int GALLARY_INTENT = 2;
     public static transient Bitmap bitmap;
     String dish_name = null;
@@ -190,6 +190,8 @@ public class ProviderHome extends AppCompatActivity
         }
         else {
             Toast.makeText(this, "photo upcloaded", Toast.LENGTH_SHORT).show();
+            var.onResumeFlag = true;
+
         }
     }
 
@@ -253,4 +255,21 @@ public class ProviderHome extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(var.onResumeFlag != true){
+            providerHomeHolder.dishName.setText("");
+            providerHomeHolder.quantity.setText("");
+            providerHomeHolder.price.setText("");
+            providerHomeHolder.addressLine1.setText("");
+            providerHomeHolder.addressLine2.setText("");
+            providerHomeHolder.city.setText("");
+            providerHomeHolder.zipCode.setText("");
+            providerHomeHolder.country.setText("");
+            providerHomeHolder.type.clearCheck();
+            providerHomeHolder.spiciness.clearCheck();
+            uri = null;
+        }
+    }
 }

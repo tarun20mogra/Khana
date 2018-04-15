@@ -8,6 +8,7 @@ public class Singleton {
     private static final Singleton instance = new Singleton();
     HashMap<String,String> urlOfTodaysFoodImage = new HashMap<>();
     HashMap<Integer,SeekerGetTodayFoodInfo> todayFoodInfoHashMap = new HashMap<>();
+    boolean onResumeFlag = false;
     ArrayList<String> cartFoodImageUrl = new ArrayList<>();
     ArrayList<SeekerGetTodayFoodInfo> cartFoodInfo = new ArrayList<>();
     ArrayList<String> quantity = new ArrayList<>();
