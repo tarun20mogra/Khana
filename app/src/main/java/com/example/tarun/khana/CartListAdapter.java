@@ -57,7 +57,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
                     context.startActivity(intent);
                 }
                 else {
-                    Toast.makeText(context, "Else", Toast.LENGTH_SHORT).show();
+
                     notifyDataSetChanged();
                 }
             }

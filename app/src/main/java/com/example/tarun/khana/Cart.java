@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -24,14 +26,14 @@ public class Cart extends AppCompatActivity {
         //total price
         double cartSubtotalPrice = 0;
         double tax = 0;
-        double fee = 3;
+
 
         //setting all the view variable for cart activity here
         TextView itemCount = (TextView) findViewById(R.id.itemCount);
         TextView cartSubtotal = (TextView) findViewById(R.id.cartSubtotal);
         TextView cartSubtotal2 = (TextView) findViewById(R.id.cartSubtotalPrice);
         TextView taxAndFee = (TextView) findViewById(R.id.taxAndFeePrice);
-        TextView applicationFee = (TextView) findViewById(R.id.applicationFeePrice);
+
         TextView totalPrice = (TextView) findViewById(R.id.price);
         Button checkout = (Button) findViewById(R.id.proceedToCheckOut);
         TextView backButton = (TextView) findViewById(R.id.backButton);
@@ -39,22 +41,24 @@ public class Cart extends AppCompatActivity {
         RecyclerView cartFoodList = (RecyclerView) findViewById(R.id.cartFoodRecyclerView);
         // calculating total price
         itemCount.setText("("+var.cartFoodInfo.size()+" items) :");
+        Toast.makeText(this, ""+var.cartFoodInfo.size(), Toast.LENGTH_SHORT).show();
         for(int i = 0 ; i < var.cartFoodInfo.size();i++){
+
             cartSubtotalPrice = (long) (cartSubtotalPrice + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
         }
         //Calculatinf the tax, applying 10.25% tax on the whole food
-        tax = (long)(0.10 * cartSubtotalPrice);
+        tax = 3 + (long)(0.10 * cartSubtotalPrice);
 
         //calculating total price
-        price = (long)(cartSubtotalPrice + tax + fee);
+        price = (long)(cartSubtotalPrice + tax);
 
 
         // Setting up all the texts
-        cartSubtotal.setText(Double.toString(cartSubtotalPrice));
-        cartSubtotal2.setText(Double.toString(cartSubtotalPrice));
-        taxAndFee.setText(Double.toString(tax));
-        applicationFee.setText(Double.toString(fee));
-        totalPrice.setText(Double.toString(price));
+        cartSubtotal.setText("$"+Double.toString(cartSubtotalPrice));
+        cartSubtotal2.setText("$"+Double.toString(cartSubtotalPrice));
+        taxAndFee.setText("$"+Double.toString(tax));
+
+        totalPrice.setText("$"+Double.toString(price));
 
 
         //setting recycler view here

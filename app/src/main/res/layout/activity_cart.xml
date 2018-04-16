@@ -143,32 +143,14 @@
                 android:id="@+id/taxAndFeePrice"
                 android:textSize="18sp"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Application Fee :"
-                android:id="@+id/applicationFee"
-                android:layout_below="@+id/taxAndFee"
-                android:textSize="18sp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:text="$120.36"
-                android:layout_below="@id/taxAndFeePrice"
-                android:id="@+id/applicationFeePrice"
-                android:textSize="18sp"
-                />
+
             <View
                 android:id="@+id/viewSeparator3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
                 android:background="#354e66"
-                android:layout_below="@id/applicationFee"/>
+                android:layout_below="@id/taxAndFeePrice"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 

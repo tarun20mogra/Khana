@@ -27,29 +27,38 @@
                 android:src="@drawable/login"
                 android:scaleType="fitXY"/>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/logo_white"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="170dp"
-                />
-            <View
-                android:layout_width="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:background="#FFFFFF"
-                android:layout_marginTop="500dp"/>
-            <TextView
-                android:layout_width="200dp"
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="K  H  A  N  A"
-                android:textSize="24dp"
-                android:textColor="@color/white"
-                android:layout_marginTop="500dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"/>
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/logo_white"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="170dp"
+                    />
+                <View
+                    android:layout_width="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF"
+                    android:layout_marginTop="500dp"/>
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="K  H  A  N  A"
+                    android:textSize="24dp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="500dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"/>
+
+            </FrameLayout>
+
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -160,16 +169,12 @@
                 android:clickable="true"
                 android:layout_marginBottom="16dp"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Healthy home cooked food delivered at your doorstep."
-                android:padding="8dp"
-                android:textStyle="italic"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:gravity="center"/>
+                <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/bonappetit"
+                    android:layout_gravity="center_horizontal"
+                    />
 
 
 

@@ -128,29 +128,13 @@
                     android:layout_marginTop="8dp"
                     android:layout_below="@+id/currentOrderPrice"
                     android:textSize="18sp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textTaxandFee"
-                    android:layout_marginTop="8dp"
-                    android:text="Application Fee : "
-                    android:textSize="18sp"
-                    android:id="@+id/textKhanaCharges"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="$3"
-                    android:id="@+id/currentKhanaChrges"
-                    android:layout_marginTop="8dp"
-                    android:layout_below="@+id/currentOrderTaxandFee"
-                    android:textSize="18sp"/>
+
 
                 <View
                     android:id="@+id/viewSeparator"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_below="@+id/textKhanaCharges"
+                    android:layout_below="@+id/currentOrderTaxandFee"
                     android:layout_marginTop="20dp"
 
                     android:background="#354e66" />
@@ -159,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/viewSeparator"
                     android:layout_marginTop="8dp"
-                    android:text="Toatal : "
+                    android:text="Total : "
                     android:textSize="18sp"
                     android:id="@+id/textTotalAmunt"/>
                 <TextView
