@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
     private Singleton var = Singleton.getInstance();
-    String quantity_number = null;
+    String quantity_number = "0";
     String image = null;
     GetUserInfo currentUserInfo;
 
@@ -38,7 +38,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         setContentView(R.layout.activity_seeker_clicked_todays_food_info);
         //getting the intent bundle from the previous activity
         final Bundle intent = getIntent().getExtras();
-        currentUserInfo = intent.getParcelable("current_user_info");
+        currentUserInfo = (GetUserInfo) intent.getSerializable("current_user_info");
 
         //ArrayList<String> url =  getIntent().getStringArrayListExtra("image_of_food_clicked");
 
@@ -71,19 +71,21 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 quantity_number = seekerClickedTodaysFoodInfoHolder.quantity_of_order.getNumber();
+                Toast.makeText(SeekerClickedTodaysFoodInfo.this, ""+quantity_number, Toast.LENGTH_SHORT).show();
             }
         });
         seekerClickedTodaysFoodInfoHolder.order_now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(quantity_number) == 0) {
+                if (quantity_number.equals("0")) {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
+                }
+                else if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
                 } else {
                     image = var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name);
                     Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this, SeekerOrderNow.class);
-                    intent1.putExtra("food info", (Serializable) var.todayFoodInfoHashMap.get(i));
+                    intent1.putExtra("food info", var.todayFoodInfoHashMap.get(i));
                     intent1.putExtra("image", image);
                     intent1.putExtra("current_user_info", currentUserInfo);
                     intent1.putExtra("order_quantity", quantity_number);
@@ -96,11 +98,12 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
-                } else if (Integer.parseInt(quantity_number) == 0) {
+                if (quantity_number.equals("0")) {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                }else {
 
                     var.showCart = true;
                     var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name));

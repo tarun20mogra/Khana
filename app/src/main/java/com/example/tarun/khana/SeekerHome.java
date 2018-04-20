@@ -210,6 +210,9 @@ public class SeekerHome extends AppCompatActivity
         }
        else if(id == R.id.action_cart){
             if(var.showCart == true){
+                for(int i = 0; i<var.cartFoodInfo.size();i++){
+                    Log.v("cart dish name",""+var.cartFoodInfo.get(i).dish_name);
+                }
                 Intent intent = new Intent(SeekerHome.this,Cart.class);
                 startActivity(intent);
             }

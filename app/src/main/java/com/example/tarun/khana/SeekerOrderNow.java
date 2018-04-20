@@ -56,13 +56,13 @@ public class SeekerOrderNow extends AppCompatActivity {
         taxAmount = 3 + (long)(Double.parseDouble(foodInfo.dish_price) * 0.10);
 
         //caculating total price here
-        totalAmount = (long)(taxAmount + (Double.parseDouble(foodInfo.dish_price) * Double.parseDouble(quantity_number)));
+        var.price = (long)(taxAmount + (Double.parseDouble(foodInfo.dish_price) * Double.parseDouble(quantity_number)));
 
         //Setting all the variables
         seekerOrderNowHolder.orderPrice.setText("$"+Double.parseDouble(foodInfo.dish_price));
         seekerOrderNowHolder.orderTax.setText("$"+Double.toString(taxAmount));
         seekerOrderNowHolder.orderName2.setText(foodInfo.dish_name);
-        seekerOrderNowHolder.totalPrice.setText("$"+Double.toString(totalAmount));
+        seekerOrderNowHolder.totalPrice.setText("$"+Double.toString(var.price));
         seekerOrderNowHolder.currentUserAddress.setText(var.getUserInfo.user_address);
         seekerOrderNowHolder.orderQuantity.setText(quantity_number);
 
@@ -79,7 +79,7 @@ public class SeekerOrderNow extends AppCompatActivity {
                 var.quantity.add(quantity_number);
                 var.cartFoodImageUrl.add(image);
                 Intent intent1 = new Intent(SeekerOrderNow.this,SeekerMakePayment.class);
-                intent1.putExtra("payment Price",totalAmount);
+
                 startActivity(intent1);
             }
         });

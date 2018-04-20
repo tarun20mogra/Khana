@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/textQuantity"
                 android:layout_below="@id/foodDetail"
-                android:text="2"
+
                 android:padding="8dp"
                 android:textSize="18sp"
                 android:id="@+id/foodQuantity"

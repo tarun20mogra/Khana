@@ -35,8 +35,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
 
     @Override
     public void onBindViewHolder(@NonNull final CartlistAdapterHolder holder, final int position) {
-        Log.v("cart",""+var.cartFoodInfo.size());
-
             Glide.with(context).load(var.cartFoodImageUrl.get(position)).into(holder.foodImage);
             holder.foodDetails.setText("Delicious "+ var.cartFoodInfo.get(position).dish_name +", " +var.cartFoodInfo.get(position).dist_type+ " with "+ var.cartFoodInfo.get(position).dish_spiciness + ".");
             holder.foodQuantity.setText(var.quantity.get(position));
@@ -45,19 +43,27 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                                    var.cartFoodInfo.remove(position);
+                var.cartSubotal = var.cartSubotal-(Double.parseDouble(var.cartFoodInfo.get(position).dish_price)*Double.parseDouble(var.quantity.get(position)));
+                var.tax = 3+ (.10 * var.cartSubotal);
+                var.cartFoodInfo.remove(position);
                 var.cartFoodImageUrl.remove(position);
                 var.quantity.remove(position);
+
                 if(var.quantity.isEmpty() && var.cartFoodImageUrl.isEmpty() && var.cartFoodInfo.isEmpty()){
                     var.showCart = false;
                     Toast.makeText(context, "Cart is empty", Toast.LENGTH_SHORT).show();
+                    var.cartFoodInfo.clear();
+                    var.cartFoodImageUrl.clear();
+                    var.quantity.clear();
+                    var.cartSubotal = 0;
+                    var.price = 0;
+                    var.tax = 0;
+                    Toast.makeText(context, ""+var.cartFoodInfo.size(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context,SeekerHome.class);
                     intent.putExtra("username",var.getUserInfo);
                     context.startActivity(intent);
                 }
                 else {
-
                     notifyDataSetChanged();
                 }
             }

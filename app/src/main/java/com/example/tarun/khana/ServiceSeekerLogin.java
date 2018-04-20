@@ -82,7 +82,7 @@ public class ServiceSeekerLogin extends Fragment {
         seekerLoginHolder.forgotPasswordSeeker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(getActivity(),ForgotPassword.class);
                 //intent.putExtra("type","Seeker");
                 startActivity(intent);

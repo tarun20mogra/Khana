@@ -24,8 +24,7 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         //total price
-        double cartSubtotalPrice = 0;
-        double tax = 0;
+
 
 
         //setting all the view variable for cart activity here
@@ -43,22 +42,21 @@ public class Cart extends AppCompatActivity {
         itemCount.setText("("+var.cartFoodInfo.size()+" items) :");
         Toast.makeText(this, ""+var.cartFoodInfo.size(), Toast.LENGTH_SHORT).show();
         for(int i = 0 ; i < var.cartFoodInfo.size();i++){
-
-            cartSubtotalPrice = (long) (cartSubtotalPrice + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
+            var.cartSubotal = (long) (var.cartSubotal + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
         }
         //Calculatinf the tax, applying 10.25% tax on the whole food
-        tax = 3 + (long)(0.10 * cartSubtotalPrice);
+        var.tax = 3 + (long)(0.10 * var.cartSubotal);
 
         //calculating total price
-        price = (long)(cartSubtotalPrice + tax);
+        var.price = (long)(var.cartSubotal + var.tax);
 
 
         // Setting up all the texts
-        cartSubtotal.setText("$"+Double.toString(cartSubtotalPrice));
-        cartSubtotal2.setText("$"+Double.toString(cartSubtotalPrice));
-        taxAndFee.setText("$"+Double.toString(tax));
+        cartSubtotal.setText("$"+Double.toString(var.cartSubotal));
+        cartSubtotal2.setText("$"+Double.toString(var.cartSubotal));
+        taxAndFee.setText("$"+Double.toString(var.tax));
 
-        totalPrice.setText("$"+Double.toString(price));
+        totalPrice.setText("$"+Double.toString(var.price));
 
 
         //setting recycler view here
@@ -75,7 +73,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Cart.this,SeekerMakePayment.class);
-                intent.putExtra("payment Price",price);
+
                 startActivity(intent);
 
             }
@@ -83,10 +81,7 @@ public class Cart extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent1 = new Intent(Cart.this,SeekerHome.class);
-                intent1.putExtra("username",var.getUserInfo);
-                startActivity(intent1);
+                Cart.super.onBackPressed();
             }
         });
 

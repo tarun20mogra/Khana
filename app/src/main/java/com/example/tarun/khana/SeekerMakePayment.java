@@ -37,14 +37,14 @@ public class SeekerMakePayment extends AppCompatActivity {
         setContentView(R.layout.activity_seeker_make_payment);
         //intent catch
         Bundle intent = getIntent().getExtras();
-        double totalAmount = (double) intent.get("payment Price");
+
         CardForm cardForm = (CardForm) findViewById(R.id.paymentCardForm);
         TextView textView = (TextView) findViewById(R.id.payment_amount);
         TextView backbutton = (TextView) findViewById(R.id.backButton);
         Button button =(Button) findViewById(R.id.btn_pay);
         button.setBackgroundResource(R.drawable.preview_button);
         button.setText(R.string.payment);
-        textView.setText(Double.toString(totalAmount));
+        textView.setText(Double.toString(var.price));
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
