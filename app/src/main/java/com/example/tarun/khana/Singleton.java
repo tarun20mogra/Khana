@@ -12,6 +12,7 @@ public class Singleton {
     double cartSubotal =0 ;
     double tax = 0;
     double price = 0;
+    boolean doCalculation = false;
     ArrayList<String> cartFoodImageUrl = new ArrayList<>();
     ArrayList<SeekerGetTodayFoodInfo> cartFoodInfo = new ArrayList<>();
     ArrayList<String> quantity = new ArrayList<>();

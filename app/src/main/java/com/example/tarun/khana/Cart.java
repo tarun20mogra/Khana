@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class Cart extends AppCompatActivity {
     private Singleton var = Singleton.getInstance();
-    double price = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,68 +23,76 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         //total price
+        if(var.showCart == true){
+            //setting all the view variable for cart activity here
+            TextView itemCount = (TextView) findViewById(R.id.itemCount);
+            TextView cartSubtotal = (TextView) findViewById(R.id.cartSubtotal);
+            TextView cartSubtotal2 = (TextView) findViewById(R.id.cartSubtotalPrice);
+            TextView taxAndFee = (TextView) findViewById(R.id.taxAndFeePrice);
+
+            TextView totalPrice = (TextView) findViewById(R.id.price);
+            Button checkout = (Button) findViewById(R.id.proceedToCheckOut);
+            TextView backButton = (TextView) findViewById(R.id.backButton);
+
+            RecyclerView cartFoodList = (RecyclerView) findViewById(R.id.cartFoodRecyclerView);
+            // calculating total price
+            itemCount.setText("("+var.cartFoodInfo.size()+" items) :");
+            for(int i = 0 ; i < var.cartFoodInfo.size();i++){
+                Log.v("name of dish in cart",""+var.cartFoodInfo.get(i).dish_name);
+                var.cartSubotal = (long) (var.cartSubotal + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
+            }
+            //Calculatinf the tax, applying 10.25% tax on the whole food
+            var.tax = 3 + (long)(0.10 * var.cartSubotal);
+
+            //calculating total price
+            var.price = (long)(var.cartSubotal + var.tax);
 
 
+            // Setting up all the texts
+            cartSubtotal.setText("$"+Double.toString(var.cartSubotal));
+            cartSubtotal2.setText("$"+Double.toString(var.cartSubotal));
+            taxAndFee.setText("$"+Double.toString(var.tax));
 
-        //setting all the view variable for cart activity here
-        TextView itemCount = (TextView) findViewById(R.id.itemCount);
-        TextView cartSubtotal = (TextView) findViewById(R.id.cartSubtotal);
-        TextView cartSubtotal2 = (TextView) findViewById(R.id.cartSubtotalPrice);
-        TextView taxAndFee = (TextView) findViewById(R.id.taxAndFeePrice);
-
-        TextView totalPrice = (TextView) findViewById(R.id.price);
-        Button checkout = (Button) findViewById(R.id.proceedToCheckOut);
-        TextView backButton = (TextView) findViewById(R.id.backButton);
-
-        RecyclerView cartFoodList = (RecyclerView) findViewById(R.id.cartFoodRecyclerView);
-        // calculating total price
-        itemCount.setText("("+var.cartFoodInfo.size()+" items) :");
-        Toast.makeText(this, ""+var.cartFoodInfo.size(), Toast.LENGTH_SHORT).show();
-        for(int i = 0 ; i < var.cartFoodInfo.size();i++){
-            var.cartSubotal = (long) (var.cartSubotal + (Double.parseDouble(var.cartFoodInfo.get(i).dish_price) * Double.parseDouble(var.quantity.get(i))));
-        }
-        //Calculatinf the tax, applying 10.25% tax on the whole food
-        var.tax = 3 + (long)(0.10 * var.cartSubotal);
-
-        //calculating total price
-        var.price = (long)(var.cartSubotal + var.tax);
+            totalPrice.setText("$"+Double.toString(var.price));
 
 
-        // Setting up all the texts
-        cartSubtotal.setText("$"+Double.toString(var.cartSubotal));
-        cartSubtotal2.setText("$"+Double.toString(var.cartSubotal));
-        taxAndFee.setText("$"+Double.toString(var.tax));
-
-        totalPrice.setText("$"+Double.toString(var.price));
-
-
-        //setting recycler view here
-        for (int i = 0; i<var.cartFoodInfo.size();i++){
-            CartListAdapter cartListAdapter = new CartListAdapter(Cart.this);
-            cartFoodList.setLayoutManager(new LinearLayoutManager(Cart.this));
-            cartFoodList.setNestedScrollingEnabled(false);
-            cartFoodList.setAdapter(cartListAdapter);
-
-        }
-
-        //make payment button click listener
-        checkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Cart.this,SeekerMakePayment.class);
-
-                startActivity(intent);
+            //setting recycler view here
+            for (int i = 0; i<var.cartFoodInfo.size();i++){
+                CartListAdapter cartListAdapter = new CartListAdapter(Cart.this);
+                cartFoodList.setLayoutManager(new LinearLayoutManager(Cart.this));
+                cartFoodList.setNestedScrollingEnabled(false);
+                cartFoodList.setAdapter(cartListAdapter);
 
             }
-        });
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cart.super.onBackPressed();
-            }
-        });
+
+            //make payment button click listener
+            checkout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Cart.this,SeekerMakePayment.class);
+                    startActivity(intent);
+
+                }
+            });
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    var.cartSubotal = 0.0;
+                    var.price = 0.0;
+                    var.tax = 0.0;
+                    Cart.super.onBackPressed();
+                }
+            });
 
 
 
+
+
+        }
+        else {
+            Intent intent1 = new Intent(Cart.this,SeekerHome.class);
+            intent1.putExtra("username",var.getUserInfo);
+            startActivity(intent1);
+        }
     }
 }

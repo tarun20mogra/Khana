@@ -3,6 +3,7 @@ package com.example.tarun.khana;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -65,13 +66,13 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodQuantity.setText(var.todayFoodInfoHashMap.get(i).dish_quantity);
         seekerClickedTodaysFoodInfoHolder.currentClickedFoodPrice.setText("$" + var.todayFoodInfoHashMap.get(i).dish_price);
         seekerClickedTodaysFoodInfoHolder.providerAddress.setText(var.todayFoodInfoHashMap.get(i).provider_address);
-        seekerClickedTodaysFoodInfoHolder.descriptionOfTheFood.setText("This is as delicious as it looks in the photo. It is " + var.todayFoodInfoHashMap.get(i).dist_type + " dish coocked properly and is mouthwatering taste.It is " + var.todayFoodInfoHashMap.get(i).dish_spiciness + ".");
+        seekerClickedTodaysFoodInfoHolder.descriptionOfTheFood.setText("This is as delicious as it looks in the photo. It is " + var.todayFoodInfoHashMap.get(i).dist_type + " dish cooked properly and is mouthwatering taste.It is " + var.todayFoodInfoHashMap.get(i).dish_spiciness + ".");
 
         seekerClickedTodaysFoodInfoHolder.quantity_of_order.setOnClickListener(new ElegantNumberButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 quantity_number = seekerClickedTodaysFoodInfoHolder.quantity_of_order.getNumber();
-                Toast.makeText(SeekerClickedTodaysFoodInfo.this, ""+quantity_number, Toast.LENGTH_SHORT).show();
+
             }
         });
         seekerClickedTodaysFoodInfoHolder.order_now.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +82,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
                 }
                 else if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed :" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
                 } else {
                     image = var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name);
                     Intent intent1 = new Intent(SeekerClickedTodaysFoodInfo.this, SeekerOrderNow.class);
@@ -102,14 +103,16 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Select some quantity", Toast.LENGTH_SHORT).show();
                 }
                 else if (Integer.parseInt(quantity_number) > Integer.parseInt(var.todayFoodInfoHashMap.get(i).dish_quantity)) {
-                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Max quantity allowed :" + var.todayFoodInfoHashMap.get(i).dish_quantity, Toast.LENGTH_SHORT).show();
                 }else {
 
                     var.showCart = true;
+                    var.doCalculation=true;
                     var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name));
                     var.cartFoodInfo.add(var.todayFoodInfoHashMap.get(i));
                     var.quantity.add(quantity_number);
                     Toast.makeText(SeekerClickedTodaysFoodInfo.this, "Added to cart", Toast.LENGTH_SHORT).show();
+                    Log.v("Cart size",""+var.cartFoodInfo.size());
 
 
                 }
