@@ -46,7 +46,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PreviewOrder"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
         <activity
             android:name=".SeekerHome"
             android:label="@string/title_activity_seeker_home"
@@ -71,7 +72,8 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".Cart"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:noHistory="true"/>
         <activity
             android:name=".ProviderHistory"
             android:launchMode="singleInstance" />

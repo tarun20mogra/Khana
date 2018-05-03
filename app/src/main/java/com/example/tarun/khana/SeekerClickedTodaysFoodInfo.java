@@ -107,7 +107,7 @@ public class SeekerClickedTodaysFoodInfo extends AppCompatActivity {
                 }else {
 
                     var.showCart = true;
-                    var.doCalculation=true;
+
                     var.cartFoodImageUrl.add(var.urlOfTodaysFoodImage.get(var.todayFoodInfoHashMap.get(i).user_name + "_" + var.todayFoodInfoHashMap.get(i).dish_name));
                     var.cartFoodInfo.add(var.todayFoodInfoHashMap.get(i));
                     var.quantity.add(quantity_number);

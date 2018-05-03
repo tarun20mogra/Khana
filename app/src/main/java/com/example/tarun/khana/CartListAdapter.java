@@ -51,6 +51,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Cartli
 
                 if(var.quantity.isEmpty() && var.cartFoodImageUrl.isEmpty() && var.cartFoodInfo.isEmpty()){
                     var.showCart = false;
+                    Log.v("cart size after delete",""+var.cartFoodInfo.size());
                     Toast.makeText(context, "Cart is empty", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context,SeekerHome.class);
                     intent.putExtra("username",var.getUserInfo);

@@ -23,7 +23,7 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         //total price
-        if(var.showCart == true){
+        if(var.showCart){
             //setting all the view variable for cart activity here
             TextView itemCount = (TextView) findViewById(R.id.itemCount);
             TextView cartSubtotal = (TextView) findViewById(R.id.cartSubtotal);
@@ -52,7 +52,6 @@ public class Cart extends AppCompatActivity {
             cartSubtotal.setText("$"+Double.toString(var.cartSubotal));
             cartSubtotal2.setText("$"+Double.toString(var.cartSubotal));
             taxAndFee.setText("$"+Double.toString(var.tax));
-
             totalPrice.setText("$"+Double.toString(var.price));
 
 
@@ -90,6 +89,10 @@ public class Cart extends AppCompatActivity {
 
         }
         else {
+            var.cartFoodInfo.clear();
+            var.quantity.clear();
+            var.cartFoodImageUrl.clear();
+            finish();
             Intent intent1 = new Intent(Cart.this,SeekerHome.class);
             intent1.putExtra("username",var.getUserInfo);
             startActivity(intent1);

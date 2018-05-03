@@ -80,7 +80,7 @@ public class SeekerHome extends AppCompatActivity
         final Bundle intent = getIntent().getExtras();
         userInfoLogin = (GetUserInfo) intent.getSerializable("username");
         var.getUserInfo = userInfoLogin;
-
+        Log.v("cart food in main",""+var.cartFoodInfo.size());
 
         //First thing first calculate the longitute and lattitude of the current user address
         currentUserAddress = userInfoLogin.user_address;
@@ -209,9 +209,12 @@ public class SeekerHome extends AppCompatActivity
             startActivity(intent);
         }
        else if(id == R.id.action_cart){
-            if(var.showCart == true){
-
+            if(var.showCart){
+                var.cartSubotal = 0.0;
+                var.price = 0.0;
+                var.tax = 0.0;
                 Intent intent = new Intent(SeekerHome.this,Cart.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
             }
             else {
